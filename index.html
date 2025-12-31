@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Base Cats — Pixel Meow😻</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --accent:#ffd36a;
+  --accent2:#ff8fd4;
+  --text:#ffffff;
+  --muted:#b8bdd9;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Inter,sans-serif;
+  color:var(--text);
+  background:#06040c;
+  overflow-x:hidden;
+}
+
+/* ===== CAT BACKGROUND ===== */
+#bg-canvas{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+}
+
+/* ===== HEADER ===== */
+header{
+  text-align:center;
+  padding:90px 20px 60px;
+}
+
+.profile-pic{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  border:4px solid var(--accent);
+  box-shadow:0 0 35px rgba(255,211,106,.6);
+  margin-bottom:24px;
+}
+
+h1{font-size:3rem;margin-bottom:12px}
+
+.tagline{
+  max-width:720px;
+  margin:0 auto 28px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.actions a{
+  display:inline-block;
+  margin:6px;
+  padding:12px 28px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#000;
+}
+
+.btn-outline{
+  border:1px solid #2b3160;
+  color:var(--text);
+}
+
+/* ===== SECTIONS ===== */
+section{
+  max-width:1100px;
+  margin:0 auto 50px;
+  padding:40px 20px;
+}
+
+.card{
+  background:rgba(20,15,35,.85);
+  backdrop-filter:blur(6px);
+  border-radius:20px;
+  padding:40px;
+  border:1px solid #3a2f5f;
+}
+
+/* ===== NFT GALLERY ===== */
+.capsule-gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+  height:520px;
+  overflow:hidden;
+  margin-top:30px;
+}
+
+.capsule-column{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  animation:capsuleScroll 30s linear infinite;
+}
+
+.capsule-column:nth-child(2){animation-duration:34s}
+.capsule-column:nth-child(3){animation-duration:38s}
+
+.capsule-column img{
+  width:100%;
+  border-radius:18px;
+  border:1px solid #3a2f5f;
+  box-shadow:0 0 18px rgba(255,211,106,.25);
+}
+
+@keyframes capsuleScroll{
+  from{transform:translateY(0)}
+  to{transform:translateY(-50%)}
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .capsule-gallery{
+    grid-template-columns:1fr;
+    height:360px;
+  }
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:28px;
+  font-size:.85rem;
+  color:var(--muted);
+  border-top:1px solid #2a2145;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<header>
+  <img src="profile.png" class="profile-pic" alt="Base Cats">
+  <h1>Base Cats</h1>
+
+  <p class="tagline">
+    A pixel-born feline society living on Base.
+    Handcrafted cats, rare traits, sharp eyes, and street attitude —
+    each one a true on-chain identity.
+  </p>
+
+  <div class="actions">
+    <a href="https://x.com/basecats0" class="btn-primary" target="_blank">Follow on X</a>
+    <a href="#gallery" class="btn-outline">View Cats</a>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section>
+  <div class="card">
+    <h2>About Base Cats</h2><br>
+    <p>
+      <strong>Base Cats</strong> is a handcrafted pixel NFT collection inspired by
+      underground culture, street cats, and early internet aesthetics.
+      <br><br>
+      Each cat is carefully built pixel by pixel — no AI, no shortcuts.
+      Traits range from calm loafers to aggressive alley kings,
+      reflecting independence, survival, and digital ownership on Base.
+      <br><br>
+      These cats don’t follow trends — they watch, wait, and strike.
+    </p>
+  </div>
+</section>
+
+<!-- NFT GALLERY -->
+<section id="gallery">
+  <div class="card">
+    <h2>Base Cats Gallery</h2>
+
+    <div class="capsule-gallery">
+
+      <div class="capsule-column">
+        <img src="cat1.png">
+        <img src="cat2.png">
+        <img src="cat3.png">
+        <img src="cat4.png">
+        <img src="cat5.png">
+        <img src="cat6.png">
+        <img src="cat7.png">
+        <img src="cat8.png">
+      </div>
+
+      <div class="capsule-column">
+        <img src="cat9.png">
+        <img src="cat10.png">
+        <img src="cat11.png">
+        <img src="cat12.png">
+        <img src="cat13.png">
+        <img src="cat14.png">
+        <img src="cat15.png">
+        <img src="cat16.png">
+      </div>
+
+      <div class="capsule-column">
+        <img src="cat17.png">
+        <img src="cat18.png">
+        <img src="cat19.png">
+        <img src="cat20.png">
+        <img src="cat21.png">
+        <img src="cat22.png">
+        <img src="cat23.png">
+        <img src="cat24.png">
+        <img src="cat25.png">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Base Cats • Base Chain
+</footer>
+
+<script>
+/* ===== CAT-EYE BACKGROUND ===== */
+const canvas=document.getElementById("bg-canvas");
+const ctx=canvas.getContext("2d");
+let w,h;
+function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+addEventListener("resize",resize);resize();
+
+const eyes=[...Array(120)].map(()=>({
+  x:Math.random()*w,
+  y:Math.random()*h,
+  r:Math.random()*1.5+0.5,
+  a:Math.random()
+}));
+
+(function anim(){
+  ctx.clearRect(0,0,w,h);
+  eyes.forEach(e=>{
+    e.a+=0.01;
+    ctx.fillStyle="rgba(255,211,106,.6)";
+    ctx.beginPath();
+    ctx.ellipse(e.x,e.y,2,5+Math.sin(e.a)*3,0,0,7);
+    ctx.fill();
+  });
+  requestAnimationFrame(anim);
+})();
+</script>
+
+</body>
+</html>
