@@ -121,8 +121,8 @@ async function connectWallet() {
     document.getElementById("status").innerText =
       "❌ Please switch to Base network";
   }
-}
 updateCountdownUI();
+}
 
 // =====================
 // 📄 WHITELIST CHECK
@@ -208,10 +208,10 @@ function updateCountdownUI() {
   const m = Math.floor((diff / (1000 * 60)) % 60);
   const s = Math.floor((diff / 1000) % 60);
 
-  el.innerText = `Mint starts in ${h}h ${m}m ${s}s`;
+  el.innerText = `⏳ Mint starts in ${h}h ${m}m ${s}s`;
 }
 
-// ✅ RUN AFTER PAGE LOAD (IMPORTANT)
+// 🔥 VERY IMPORTANT (mobile + desktop)
 document.addEventListener("DOMContentLoaded", () => {
   updateCountdownUI();
   setInterval(updateCountdownUI, 1000);
