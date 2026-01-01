@@ -122,6 +122,7 @@ async function connectWallet() {
       "❌ Please switch to Base network";
   }
 }
+updateCountdownUI();
 
 // =====================
 // 📄 WHITELIST CHECK
@@ -192,10 +193,10 @@ async function mintNFT() {
   }
 }
 function updateCountdownUI() {
-  const now = Date.now();
   const el = document.getElementById("countdown");
-
   if (!el) return;
+
+  const now = Date.now();
 
   if (now >= MINT_TIME) {
     el.innerText = "🟢 Mint is LIVE";
@@ -210,7 +211,12 @@ function updateCountdownUI() {
   el.innerText = `Mint starts in ${h}h ${m}m ${s}s`;
 }
 
-setInterval(updateCountdownUI, 1000);
+// ✅ RUN AFTER PAGE LOAD (IMPORTANT)
+document.addEventListener("DOMContentLoaded", () => {
+  updateCountdownUI();
+  setInterval(updateCountdownUI, 1000);
+});
+
 
 // =====================
 // 🔘 BUTTON HOOKS
