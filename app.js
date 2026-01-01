@@ -1,42 +1,49 @@
-/*************************************************
- * BASE CATS – FINAL MINT LOGIC
- * - Force Base chain (8453)
- * - Wallet connect
- * - Whitelist check
- * - Mint schedule (time lock)
- * - Free mint (gas only)
- *************************************************/
+// ================= CONFIG =================
 
-// =====================
-// 🔗 CONTRACT INFO
-// =====================
-const CONTRACT_ADDRESS = "0xFED68aE5123369Ed79EE210596368B3B5fEdDb63";
-
-const ABI = [
-  "function whitelistMint() external"
-];
-
-// =====================
-// 🔵 BASE CHAIN CONFIG
-// =====================
-const BASE_CHAIN_ID = "0x2105"; // 8453 (Base Mainnet)
-
-// =====================
-// ⏰ MINT DATE (UTC)
-// =====================
-// Example: 20 Jan 2025, 18:00 UTC
+// 🟢 Mint time: 20 Jan 2026, 10:00 PM BD = 16:00 UTC
 const MINT_TIME = new Date("2026-01-20T16:00:00Z").getTime();
 
-// =====================
-// GLOBALS
-// =====================
+// 🔵 Base Mainnet
+const BASE_CHAIN_ID = "0x2105"; // 8453
+
+// 🔗 Contract info
+const CONTRACT_ADDRESS = "0xFED68aE5123369Ed79EE210596368B3B5fEdDb63"; // <-- replace
+const CONTRACT_ABI = [
+  "function mint() external",
+];
+
+// ================= GLOBALS =================
 let provider;
 let signer;
 let userAddress;
 
-// =====================
-// 🔄 SWITCH TO BASE
-// =====================
+// ================= COUNTDOWN =================
+function updateCountdownUI() {
+  const el = document.getElementById("countdown");
+  if (!el) return;
+
+  const now = Date.now();
+
+  if (now < MINT_TIME) {
+    const diff = MINT_TIME - now;
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    el.innerText = `⏳ Mint starts in ${d}d ${h}h ${m}m ${s}s`;
+  } else {
+    el.innerText = "🟢 Mint is LIVE";
+  }
+}
+
+// Run countdown after page load (mobile safe)
+document.addEventListener("DOMContentLoaded", () => {
+  updateCountdownUI();
+  setInterval(updateCountdownUI, 1000);
+});
+
+// ================= BASE NETWORK =================
 async function switchToBase() {
   const currentChain = await window.ethereum.request({
     method: "eth_chainId"
@@ -50,7 +57,6 @@ async function switchToBase() {
       params: [{ chainId: BASE_CHAIN_ID }]
     });
   } catch (err) {
-    // Base not added → add it
     if (err.code === 4902) {
       await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -59,7 +65,7 @@ async function switchToBase() {
           chainName: "Base",
           rpcUrls: ["https://mainnet.base.org"],
           nativeCurrency: {
-            name: "Ethereum",
+            name: "ETH",
             symbol: "ETH",
             decimals: 18
           },
@@ -72,30 +78,7 @@ async function switchToBase() {
   }
 }
 
-// =====================
-// ⏳ MINT TIME CHECK
-// =====================
-function isMintLive() {
-  const now = Date.now();
-
-  if (now < MINT_TIME) {
-    const diff = MINT_TIME - now;
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-
-    document.getElementById("status").innerText =
-      `⏳ Mint starts in ${hours}h ${minutes}m`;
-
-    document.getElementById("mintBtn").style.display = "none";
-    return false;
-  }
-
-  return true;
-}
-
-// =====================
-// 🔐 WALLET CONNECT
-// =====================
+// ================= WALLET CONNECT =================
 async function connectWallet() {
   if (!window.ethereum) {
     alert("MetaMask not found");
@@ -103,7 +86,6 @@ async function connectWallet() {
   }
 
   try {
-    // FORCE BASE NETWORK
     await switchToBase();
 
     provider = new ethers.BrowserProvider(window.ethereum);
@@ -111,63 +93,54 @@ async function connectWallet() {
     userAddress = (await signer.getAddress()).toLowerCase();
 
     document.getElementById("status").innerText =
-      "Connected on Base: " +
+      "Connected: " +
       userAddress.slice(0, 6) +
       "..." +
       userAddress.slice(-4);
 
+    updateCountdownUI();
     checkWhitelist();
+    updateMintButton();
   } catch (err) {
     document.getElementById("status").innerText =
       "❌ Please switch to Base network";
   }
-updateCountdownUI();
 }
 
-// =====================
-// 📄 WHITELIST CHECK
-// =====================
+// ================= WHITELIST =================
 async function checkWhitelist() {
   try {
     const res = await fetch("whitelist.json");
     const list = await res.json();
 
-    const isWhitelisted = list
-      .map(addr => addr.toLowerCase())
-      .includes(userAddress);
-
-    if (!isWhitelisted) {
+    if (!list.map(a => a.toLowerCase()).includes(userAddress)) {
       document.getElementById("status").innerText =
-        "❌ You are not whitelisted";
+        "❌ Wallet not whitelisted";
       document.getElementById("mintBtn").style.display = "none";
-      return;
     }
-
-    if (!isMintLive()) return;
-
-    document.getElementById("status").innerText =
-      "✅ You are eligible to mint";
-    document.getElementById("mintBtn").style.display = "inline-block";
-  } catch (err) {
-    document.getElementById("status").innerText =
-      "❌ Whitelist check failed";
+  } catch (e) {
+    console.error("Whitelist load error");
   }
 }
 
-// =====================
-// 🪙 MINT FUNCTION
-// =====================
-async function mintNFT() {
-  // Extra safety: ensure Base
-  const chainId = await window.ethereum.request({
-    method: "eth_chainId"
-  });
+// ================= MINT STATE =================
+function isMintLive() {
+  return Date.now() >= MINT_TIME;
+}
 
-  if (chainId !== BASE_CHAIN_ID) {
-    alert("Please switch to Base network");
-    return;
+function updateMintButton() {
+  const mintBtn = document.getElementById("mintBtn");
+  if (!mintBtn) return;
+
+  if (isMintLive()) {
+    mintBtn.style.display = "block";
+  } else {
+    mintBtn.style.display = "none";
   }
+}
 
+// ================= MINT =================
+async function mintNFT() {
   if (!isMintLive()) {
     alert("Mint not live yet");
     return;
@@ -176,50 +149,20 @@ async function mintNFT() {
   try {
     const contract = new ethers.Contract(
       CONTRACT_ADDRESS,
-      ABI,
+      CONTRACT_ABI,
       signer
     );
 
-    document.getElementById("status").innerText = "⏳ Minting...";
-
-    const tx = await contract.whitelistMint();
+    const tx = await contract.mint();
+    document.getElementById("status").innerText = "Minting...";
     await tx.wait();
 
-    document.getElementById("status").innerText =
-      "🎉 Mint successful! Check OpenSea (Base)";
+    document.getElementById("status").innerText = "✅ Mint successful";
   } catch (err) {
-    document.getElementById("status").innerText =
-      "❌ Mint failed";
+    document.getElementById("status").innerText = "❌ Mint failed";
   }
 }
-function updateCountdownUI() {
-  const el = document.getElementById("countdown");
-  if (!el) return;
 
-  const now = Date.now();
-
-  if (now >= MINT_TIME) {
-    el.innerText = "🟢 Mint is LIVE";
-    return;
-  }
-
-  const diff = MINT_TIME - now;
-  const h = Math.floor(diff / (1000 * 60 * 60));
-  const m = Math.floor((diff / (1000 * 60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-
-  el.innerText = `⏳ Mint starts in ${h}h ${m}m ${s}s`;
-}
-
-// 🔥 VERY IMPORTANT (mobile + desktop)
-document.addEventListener("DOMContentLoaded", () => {
-  updateCountdownUI();
-  setInterval(updateCountdownUI, 1000);
-});
-
-
-// =====================
-// 🔘 BUTTON HOOKS
-// =====================
-document.getElementById("connectBtn").onclick = connectWallet;
-document.getElementById("mintBtn").onclick = mintNFT;
+// ================= BUTTON HOOKS =================
+window.connectWallet = connectWallet;
+window.mintNFT = mintNFT;
