@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mint Base Cats</title>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.8.1/dist/ethers.umd.min.js"></script>
+
+<style>
+body{
+  background:#06040c;
+  color:white;
+  font-family:Arial,sans-serif;
+  text-align:center;
+}
+.box{
+  max-width:420px;
+  margin:80px auto;
+  padding:30px;
+  background:#140f23;
+  border-radius:16px;
+}
+button{
+  padding:14px 28px;
+  margin-top:14px;
+  border-radius:999px;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+  background:#ffd36a;
+  color:#000;
+}
+#status{margin-top:12px;color:#b8bdd9}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>🐱 Base Cats Mint</h1>
+  <p>Whitelist only • Free mint (gas only)</p>
+
+  <button id="connectBtn">Connect Wallet</button>
+  <button id="mintBtn" style="display:none;">Mint Free</button>
+
+  <p id="status"></p>
+
+  <p><a href="index.html" style="color:#888">← Back</a></p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
