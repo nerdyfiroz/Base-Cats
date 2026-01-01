@@ -7,7 +7,7 @@ const MINT_TIME = new Date("2026-01-20T16:00:00Z").getTime();
 const BASE_CHAIN_ID = "0x2105"; // 8453
 
 // 🔗 Contract
-const CONTRACT_ADDRESS = "0xYOUR_CONTRACT_ADDRESS"; // <-- replace this
+const CONTRACT_ADDRESS = "0xFED68aE5123369Ed79EE210596368B3B5fEdDb63"; // <-- replace this
 const CONTRACT_ABI = [
   "function mint() external"
 ];
