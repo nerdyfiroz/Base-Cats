@@ -25,7 +25,7 @@ const BASE_CHAIN_ID = "0x2105"; // 8453 (Base Mainnet)
 // ⏰ MINT DATE (UTC)
 // =====================
 // Example: 20 Jan 2025, 18:00 UTC
-const MINT_TIME = new Date("2025-01-20T18:00:00Z").getTime();
+const MINT_TIME = new Date("2026-01-20T16:00:00Z").getTime();
 
 // =====================
 // GLOBALS
