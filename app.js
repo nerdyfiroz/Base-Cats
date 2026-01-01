@@ -1,21 +1,21 @@
 // ================= CONFIG =================
 
-// 🟢 Mint time: 20 Jan 2026, 10:00 PM BD = 16:00 UTC
+// 🕙 Mint time: 20 Jan 2026, 10:00 PM BD = 16:00 UTC
 const MINT_TIME = new Date("2026-01-20T16:00:00Z").getTime();
 
 // 🔵 Base Mainnet
 const BASE_CHAIN_ID = "0x2105"; // 8453
 
-// 🔗 Contract info
-const CONTRACT_ADDRESS = "0xFED68aE5123369Ed79EE210596368B3B5fEdDb63"; // <-- replace
+// 🔗 Contract
+const CONTRACT_ADDRESS = "0xYOUR_CONTRACT_ADDRESS"; // <-- replace this
 const CONTRACT_ABI = [
-  "function mint() external",
+  "function mint() external"
 ];
 
-// ================= GLOBALS =================
+// ================= GLOBAL =================
 let provider;
 let signer;
-let userAddress;
+let userAddress = null;
 
 // ================= COUNTDOWN =================
 function updateCountdownUI() {
@@ -37,7 +37,6 @@ function updateCountdownUI() {
   }
 }
 
-// Run countdown after page load (mobile safe)
 document.addEventListener("DOMContentLoaded", () => {
   updateCountdownUI();
   setInterval(updateCountdownUI, 1000);
@@ -45,11 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ================= BASE NETWORK =================
 async function switchToBase() {
-  const currentChain = await window.ethereum.request({
+  const chainId = await window.ethereum.request({
     method: "eth_chainId"
   });
 
-  if (currentChain === BASE_CHAIN_ID) return;
+  if (chainId === BASE_CHAIN_ID) return;
 
   try {
     await window.ethereum.request({
@@ -81,15 +80,16 @@ async function switchToBase() {
 // ================= WALLET CONNECT =================
 async function connectWallet() {
   if (!window.ethereum) {
-    alert("MetaMask not found");
+    alert("Wallet not detected");
     return;
   }
 
   try {
+    await window.ethereum.request({ method: "eth_requestAccounts" });
     await switchToBase();
 
-    provider = new ethers.BrowserProvider(window.ethereum);
-    signer = await provider.getSigner();
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
     userAddress = (await signer.getAddress()).toLowerCase();
 
     document.getElementById("status").innerText =
@@ -99,11 +99,13 @@ async function connectWallet() {
       userAddress.slice(-4);
 
     updateCountdownUI();
-    checkWhitelist();
+    await checkWhitelist();
     updateMintButton();
+
   } catch (err) {
+    console.error(err);
     document.getElementById("status").innerText =
-      "❌ Please switch to Base network";
+      "❌ Wallet connection failed";
   }
 }
 
@@ -117,9 +119,10 @@ async function checkWhitelist() {
       document.getElementById("status").innerText =
         "❌ Wallet not whitelisted";
       document.getElementById("mintBtn").style.display = "none";
+      return;
     }
   } catch (e) {
-    console.error("Whitelist load error");
+    console.error("Whitelist error");
   }
 }
 
@@ -153,16 +156,17 @@ async function mintNFT() {
       signer
     );
 
+    document.getElementById("status").innerText = "Minting…";
     const tx = await contract.mint();
-    document.getElementById("status").innerText = "Minting...";
     await tx.wait();
 
     document.getElementById("status").innerText = "✅ Mint successful";
   } catch (err) {
+    console.error(err);
     document.getElementById("status").innerText = "❌ Mint failed";
   }
 }
 
-// ================= BUTTON HOOKS =================
+// ================= GLOBAL EXPORT =================
 window.connectWallet = connectWallet;
 window.mintNFT = mintNFT;
