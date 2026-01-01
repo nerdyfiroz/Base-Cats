@@ -112,10 +112,16 @@ button{
 
     <div id="countdown" style="min-height:24px;font-weight:bold;color:#ffd36a;"></div>
 
-    <button id="connectBtn">Connect Wallet</button>
-    <button id="mintBtn">Mint Free</button>
+   <button id="connectBtn" onclick="connectWallet()">
+  Connect Wallet
+</button>
 
-    <div id="status"></div>
+<button id="mintBtn" onclick="mintNFT()" style="display:none">
+  Mint
+</button>
+
+<div id="countdown"></div>
+<div id="status"></div>
 
     <a href="index.html" class="back">← Back to home</a>
   </div>
