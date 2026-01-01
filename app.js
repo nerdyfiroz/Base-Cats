@@ -191,6 +191,26 @@ async function mintNFT() {
       "❌ Mint failed";
   }
 }
+function updateCountdownUI() {
+  const now = Date.now();
+  const el = document.getElementById("countdown");
+
+  if (!el) return;
+
+  if (now >= MINT_TIME) {
+    el.innerText = "🟢 Mint is LIVE";
+    return;
+  }
+
+  const diff = MINT_TIME - now;
+  const h = Math.floor(diff / (1000 * 60 * 60));
+  const m = Math.floor((diff / (1000 * 60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  el.innerText = `Mint starts in ${h}h ${m}m ${s}s`;
+}
+
+setInterval(updateCountdownUI, 1000);
 
 // =====================
 // 🔘 BUTTON HOOKS
