@@ -1,172 +1,142 @@
-// ================= CONFIG =================
-
-// 🕙 Mint time: 20 Jan 2026, 10:00 PM BD = 16:00 UTC
-const MINT_TIME = new Date("2026-01-20T16:00:00Z").getTime();
-
-// 🔵 Base Mainnet
+/*********************************
+ * CONFIG
+ *********************************/
 const BASE_CHAIN_ID = "0x2105"; // 8453
+const MINT_TIME = new Date("2026-01-20T16:00:00Z").getTime(); // BD 10 PM
+const statusEl = document.getElementById("status");
+const mintBtn = document.getElementById("mintBtn");
 
-// 🔗 Contract
-const CONTRACT_ADDRESS = "0xFED68aE5123369Ed79EE210596368B3B5fEdDb63"; // <-- replace this
-const CONTRACT_ABI = [
-  "function mint() external"
-];
-
-// ================= GLOBAL =================
-let provider;
-let signer;
-let userAddress = null;
-
-// ================= COUNTDOWN =================
-function updateCountdownUI() {
-  const el = document.getElementById("countdown");
-  if (!el) return;
-
-  const now = Date.now();
-
-  if (now < MINT_TIME) {
+/*********************************
+ * COUNTDOWN
+ *********************************/
+function startCountdown() {
+  const timer = setInterval(() => {
+    const now = Date.now();
     const diff = MINT_TIME - now;
+
+    if (diff <= 0) {
+      clearInterval(timer);
+      statusEl.innerText = "🟢 Mint is live";
+      mintBtn.disabled = false;
+      return;
+    }
+
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const m = Math.floor((diff / (1000 * 60)) % 60);
     const s = Math.floor((diff / 1000) % 60);
 
-    el.innerText = `⏳ Mint starts in ${d}d ${h}h ${m}m ${s}s`;
-  } else {
-    el.innerText = "🟢 Mint is LIVE";
-  }
+    statusEl.innerText = `⏳ Mint starts in ${d}d ${h}h ${m}m ${s}s`;
+  }, 1000);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  updateCountdownUI();
-  setInterval(updateCountdownUI, 1000);
-});
+startCountdown();
 
-// ================= BASE NETWORK =================
+/*********************************
+ * SWITCH TO BASE
+ *********************************/
 async function switchToBase() {
-  const chainId = await window.ethereum.request({
-    method: "eth_chainId"
-  });
-
-  if (chainId === BASE_CHAIN_ID) return;
-
   try {
-    await window.ethereum.request({
+    await ethereum.request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: BASE_CHAIN_ID }]
+      params: [{ chainId: BASE_CHAIN_ID }],
     });
+    return true;
   } catch (err) {
     if (err.code === 4902) {
-      await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-          chainId: BASE_CHAIN_ID,
-          chainName: "Base",
-          rpcUrls: ["https://mainnet.base.org"],
-          nativeCurrency: {
-            name: "ETH",
-            symbol: "ETH",
-            decimals: 18
-          },
-          blockExplorerUrls: ["https://basescan.org"]
-        }]
-      });
-    } else {
-      throw err;
+      try {
+        await ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+            chainId: BASE_CHAIN_ID,
+            chainName: "Base",
+            rpcUrls: ["https://mainnet.base.org"],
+            nativeCurrency: {
+              name: "Ether",
+              symbol: "ETH",
+              decimals: 18,
+            },
+            blockExplorerUrls: ["https://basescan.org"],
+          }],
+        });
+        return true;
+      } catch {
+        return false;
+      }
     }
+    return false;
   }
 }
 
-// ================= WALLET CONNECT =================
+/*********************************
+ * WHITELIST CHECK
+ *********************************/
+async function checkWhitelist(address) {
+  try {
+    statusEl.innerText = "🔍 Checking whitelist...";
+
+    const res = await fetch("/api/whitelist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ address }),
+    });
+
+    const data = await res.json();
+
+    if (data.whitelisted) {
+      statusEl.innerText = "✅ You are whitelisted";
+      if (Date.now() >= MINT_TIME) mintBtn.disabled = false;
+    } else {
+      statusEl.innerText = "❌ You are not whitelisted";
+      mintBtn.disabled = true;
+    }
+  } catch (err) {
+    console.error(err);
+    statusEl.innerText = "⚠️ Whitelist check failed";
+  }
+}
+
+/*********************************
+ * CONNECT WALLET
+ *********************************/
 async function connectWallet() {
   if (!window.ethereum) {
-    alert("Wallet not detected");
+    alert("Please install MetaMask / Web3 wallet");
     return;
   }
 
-  try {
-    await window.ethereum.request({ method: "eth_requestAccounts" });
-    await switchToBase();
+  statusEl.innerText = "🔌 Connecting wallet...";
 
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();
-    userAddress = (await signer.getAddress()).toLowerCase();
+  const accounts = await ethereum.request({
+    method: "eth_requestAccounts",
+  });
 
-    document.getElementById("status").innerText =
-      "Connected: " +
-      userAddress.slice(0, 6) +
-      "..." +
-      userAddress.slice(-4);
+  const address = accounts[0];
 
-    updateCountdownUI();
-    await checkWhitelist();
-    updateMintButton();
+  statusEl.innerText = "🔄 Switching to Base network...";
+  const switched = await switchToBase();
 
-  } catch (err) {
-    console.error(err);
-    document.getElementById("status").innerText =
-      "❌ Wallet connection failed";
+  if (!switched) {
+    statusEl.innerText = "❌ Please switch to Base network";
+    return;
   }
+
+  // Desktop instantly works
+  await checkWhitelist(address);
 }
 
-// ================= WHITELIST =================
-async function checkWhitelist() {
-  try {
-    const res = await fetch("whitelist.json");
-    const list = await res.json();
+/*********************************
+ * MOBILE FIX (CRITICAL)
+ *********************************/
+// Mobile wallets switch late → wait for chainChanged
+if (window.ethereum) {
+  ethereum.on("chainChanged", async () => {
+    const accounts = await ethereum.request({
+      method: "eth_accounts",
+    });
 
-    if (!list.map(a => a.toLowerCase()).includes(userAddress)) {
-      document.getElementById("status").innerText =
-        "❌ Wallet not whitelisted";
-      document.getElementById("mintBtn").style.display = "none";
-      return;
+    if (accounts.length > 0) {
+      await checkWhitelist(accounts[0]);
     }
-  } catch (e) {
-    console.error("Whitelist error");
-  }
+  });
 }
-
-// ================= MINT STATE =================
-function isMintLive() {
-  return Date.now() >= MINT_TIME;
-}
-
-function updateMintButton() {
-  const mintBtn = document.getElementById("mintBtn");
-  if (!mintBtn) return;
-
-  if (isMintLive()) {
-    mintBtn.style.display = "block";
-  } else {
-    mintBtn.style.display = "none";
-  }
-}
-
-// ================= MINT =================
-async function mintNFT() {
-  if (!isMintLive()) {
-    alert("Mint not live yet");
-    return;
-  }
-
-  try {
-    const contract = new ethers.Contract(
-      CONTRACT_ADDRESS,
-      CONTRACT_ABI,
-      signer
-    );
-
-    document.getElementById("status").innerText = "Minting…";
-    const tx = await contract.mint();
-    await tx.wait();
-
-    document.getElementById("status").innerText = "✅ Mint successful";
-  } catch (err) {
-    console.error(err);
-    document.getElementById("status").innerText = "❌ Mint failed";
-  }
-}
-
-// ================= GLOBAL EXPORT =================
-window.connectWallet = connectWallet;
-window.mintNFT = mintNFT;
