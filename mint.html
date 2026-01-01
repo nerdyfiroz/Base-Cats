@@ -5,9 +5,9 @@
 <title>Mint Base Cats</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ethers -->
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-<script src="app.js"></script>
-  
+
 <style>
 /* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -81,15 +81,17 @@ button{
   margin:14px 0;
   font-weight:bold;
   color:#ffd36a;
+  min-height:24px;
 }
 
 #status{
   margin-top:10px;
   color:#b8bdd9;
+  min-height:20px;
 }
 
 .back{
-  margin-top:14px;
+  margin-top:16px;
   display:block;
   color:#777;
   text-decoration:none;
@@ -111,23 +113,21 @@ button{
     <h1>🐱 Base Cats</h1>
     <p>Free mint • Base chain</p>
 
-    <div id="countdown" style="min-height:24px;font-weight:bold;color:#ffd36a;"></div>
+    <!-- COUNTDOWN -->
+    <div id="countdown"></div>
 
-   <button id="connectBtn" onclick="connectWallet()">
-  Connect Wallet
-</button>
+    <!-- ACTION BUTTONS -->
+    <button id="connectBtn" onclick="connectWallet()">Connect Wallet</button>
+    <button id="mintBtn" onclick="mintNFT()">Mint</button>
 
-<button id="mintBtn" onclick="mintNFT()" style="display:none">
-  Mint
-</button>
-
-<div id="countdown"></div>
-<div id="status"></div>
+    <!-- STATUS -->
+    <div id="status"></div>
 
     <a href="index.html" class="back">← Back to home</a>
   </div>
 </div>
 
+<!-- app.js LAST (IMPORTANT) -->
 <script src="app.js"></script>
 </body>
 </html>
