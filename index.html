@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Base Cats — Pixel Meow😻</title>
+<title>Base Cats — Pixel Meow 😻</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -24,7 +24,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== CAT BACKGROUND ===== */
+/* ===== BACKGROUND ===== */
 #bg-canvas{
   position:fixed;
   inset:0;
@@ -89,6 +89,29 @@ section{
   border:1px solid #3a2f5f;
 }
 
+/* ===== MINT ===== */
+.mint-box{
+  text-align:center;
+  margin-top:20px;
+}
+
+.mint-box button{
+  padding:14px 28px;
+  margin:10px;
+  border-radius:999px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#000;
+  font-size:16px;
+}
+
+#status{
+  margin-top:10px;
+  color:var(--muted);
+}
+
 /* ===== NFT GALLERY ===== */
 .capsule-gallery{
   display:grid;
@@ -149,14 +172,13 @@ footer{
   <h1>Base Cats</h1>
 
   <p class="tagline">
-    A pixel-born feline society living on Base.
-    Handcrafted cats, rare traits, sharp eyes, and street attitude —
-    each one a true on-chain identity.
+    A pixel-born feline society living on Base.<br>
+    Handcrafted cats, rare traits & pure on-chain identity.
   </p>
 
   <div class="actions">
     <a href="https://x.com/basecats0" class="btn-primary" target="_blank">Follow on X</a>
-    <a href="#gallery" class="btn-outline">View Cats</a>
+    <a href="#mint" class="btn-outline">Mint</a>
   </div>
 </header>
 
@@ -165,59 +187,42 @@ footer{
   <div class="card">
     <h2>About Base Cats</h2><br>
     <p>
-      <strong>Base Cats</strong> is a handcrafted pixel NFT collection inspired by
+      Base Cats is a handcrafted pixel NFT collection inspired by
       underground culture, street cats, and early internet aesthetics.
       <br><br>
-      Each cat is carefully built pixel by pixel — no AI, no shortcuts.
-      Traits range from calm loafers to aggressive alley kings,
-      reflecting independence, survival, and digital ownership on Base.
-      <br><br>
-      These cats don’t follow trends — they watch, wait, and strike.
+      No AI. No shortcuts. Just pure pixel craft.
     </p>
   </div>
 </section>
 
-<!-- NFT GALLERY -->
+<!-- MINT -->
+<section id="mint">
+  <div class="card mint-box">
+    <h2>Free Mint</h2>
+    <p>Whitelist only • Gas fee required</p>
+
+    <button id="connectBtn">Connect Wallet</button>
+    <button id="mintBtn" style="display:none;">Mint Free</button>
+
+    <p id="status"></p>
+  </div>
+</section>
+
+<!-- GALLERY -->
 <section id="gallery">
   <div class="card">
-    <h2>Base Cats Gallery</h2>
+    <h2>Gallery</h2>
 
     <div class="capsule-gallery">
-
       <div class="capsule-column">
-        <img src="163.png">
-        <img src="229.png">
-        <img src="31.png">
-        <img src="368.png">
-        <img src="429.png">
-        <img src="502.png">
-        <img src="681.png">
-        <img src="701.png">
+        <img src="163.png"><img src="229.png"><img src="31.png"><img src="368.png">
       </div>
-
       <div class="capsule-column">
-        <img src="714.png">
-        <img src="119.png">
-        <img src="13.png">
-        <img src="110.png">
-        <img src="11.png">
-        <img src="109.png">
-        <img src="108.png">
-        <img src="107.png">
+        <img src="714.png"><img src="119.png"><img src="13.png"><img src="110.png">
       </div>
-
       <div class="capsule-column">
-        <img src="106.png">
-        <img src="105.png">
-        <img src="104.png">
-        <img src="103.png">
-        <img src="102.png">
-        <img src="101.png">
-        <img src="100.png">
-        <img src="10.png">
-        <img src="1.png">
+        <img src="106.png"><img src="105.png"><img src="104.png"><img src="103.png">
       </div>
-
     </div>
   </div>
 </section>
@@ -226,8 +231,8 @@ footer{
   © 2026 Base Cats • Base Chain
 </footer>
 
+<!-- BACKGROUND EFFECT -->
 <script>
-/* ===== CAT-EYE BACKGROUND ===== */
 const canvas=document.getElementById("bg-canvas");
 const ctx=canvas.getContext("2d");
 let w,h;
@@ -237,7 +242,6 @@ addEventListener("resize",resize);resize();
 const eyes=[...Array(120)].map(()=>({
   x:Math.random()*w,
   y:Math.random()*h,
-  r:Math.random()*1.5+0.5,
   a:Math.random()
 }));
 
@@ -245,7 +249,7 @@ const eyes=[...Array(120)].map(()=>({
   ctx.clearRect(0,0,w,h);
   eyes.forEach(e=>{
     e.a+=0.01;
-    ctx.fillStyle="rgba(255,211,106,.6)";
+    ctx.fillStyle="rgba(255,211,106,.5)";
     ctx.beginPath();
     ctx.ellipse(e.x,e.y,2,5+Math.sin(e.a)*3,0,0,7);
     ctx.fill();
@@ -253,10 +257,8 @@ const eyes=[...Array(120)].map(()=>({
   requestAnimationFrame(anim);
 })();
 </script>
-<button id="connectBtn">Connect Wallet</button>
-<button id="mintBtn" style="display:none;">Mint Free</button>
-<p id="status"></p>
 
+<!-- WEB3 -->
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.8.1/dist/ethers.umd.min.js"></script>
 <script src="app.js"></script>
 
