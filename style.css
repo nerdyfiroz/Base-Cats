@@ -1,3 +1,40 @@
+/* ===== INTRO CINEMATIC UI ===== */
+
+#intro {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #080b18, #02030a);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.intro-inner {
+  text-align: center;
+}
+
+.intro-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 0.2em;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 40px rgba(93,169,255,0.4);
+}
+
+.intro-sub {
+  margin-top: 14px;
+  color: #6f8cff;
+  letter-spacing: 0.25em;
+  font-size: 0.9rem;
+}
+
+/* LOCK SCROLL DURING INTRO */
+body.intro-lock {
+  height: 100vh;
+  overflow: hidden;
+}
 * {
   margin: 0;
   padding: 0;
