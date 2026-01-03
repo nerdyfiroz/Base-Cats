@@ -1,3 +1,40 @@
+document.body.classList.add("intro-lock");
+
+const introTL = gsap.timeline({
+  defaults: { ease: "power4.out" }
+});
+
+introTL
+  .from(".intro-title", {
+    y: 120,
+    opacity: 0,
+    duration: 1.4
+  })
+  .from(".intro-sub", {
+    y: 60,
+    opacity: 0,
+    duration: 1
+  }, "-=0.6")
+
+  // subtle glitch pulse
+  .to(".intro-title", {
+    textShadow: "0 0 80px rgba(93,169,255,0.9)",
+    duration: 0.3,
+    repeat: 2,
+    yoyo: true
+  })
+
+  // exit intro
+  .to("#intro", {
+    y: "-100%",
+    duration: 1.4,
+    delay: 0.8
+  })
+
+  .add(() => {
+    document.body.classList.remove("intro-lock");
+    document.getElementById("intro").remove();
+  });
 gsap.registerPlugin(ScrollTrigger);
 
 /* Floating NFT loader */
