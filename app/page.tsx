@@ -70,49 +70,50 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section id="home" className="hero relative">
-          <div className="container hero-content">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
-              className="relative z-10"
-            >
-              <h1 className="hero-title display-font">
-                BASE <br/>
-                <span style={{ color: '#89CFF0' }}>CATS</span> <br/>
-                COLLECTION
-              </h1>
+          <div className="container">
+            <div className="hero-split">
+              
+              {/* Left Side: Text and Buttons */}
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
+                className="hero-text-side relative z-10"
+              >
+                <h1 className="hero-title display-font">
+                  BASE <br/>
+                  <span style={{ color: '#89CFF0' }}>CATS</span> <br/>
+                  COLLECTION
+                </h1>
 
-              {/* The "GIF" Character Overlapping the Text */}
-              <motion.img 
-                src={`/NFTs/cat_nft_${gifIndex.toString().padStart(3, '0')}.png`}
-                alt="Base Cats Character"
-                className="absolute z-20 object-contain pointer-events-none drop-shadow-2xl"
-                style={{ 
-                  top: '50%', 
-                  left: '50%', 
-                  transform: 'translate(-50%, -50%)',
-                  width: 'min(100vw, 600px)',
-                  height: 'min(100vh, 600px)',
-                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))'
-                }}
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-              />
-            </motion.div>
+                <div className="btn-group relative z-30">
+                  <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-primary">
+                    MINT NOW
+                  </a>
+                  <a href="#collection" className="btn-uni btn-uni-outline">
+                    EXPLORE
+                  </a>
+                </div>
+              </motion.div>
 
-            <motion.div 
-              className="btn-group relative z-30"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-primary">
-                MINT NOW
-              </a>
-              <a href="#collection" className="btn-uni btn-uni-outline">
-                EXPLORE
-              </a>
-            </motion.div>
+              {/* Right Side: The "GIF" Card */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8, rotateZ: -10 }}
+                animate={{ opacity: 1, scale: 1, rotateZ: 5 }}
+                transition={{ duration: 0.8, type: "spring", bounce: 0.5, delay: 0.2 }}
+                className="hero-image-side relative z-20"
+              >
+                <div className="hero-gif-card">
+                  <img 
+                    src={`/NFTs/cat_nft_${gifIndex.toString().padStart(3, '0')}.png`}
+                    alt="Base Cats Character"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/40 pointer-events-none"></div>
+                </div>
+              </motion.div>
+
+            </div>
           </div>
         </section>
 
