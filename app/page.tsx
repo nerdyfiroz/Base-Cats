@@ -34,8 +34,6 @@ export default function Home() {
     };
   }, []);
 
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   const handleComingSoon = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.preventDefault();
     const target = e.currentTarget;
