@@ -24,6 +24,18 @@ export default function Home() {
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
+  const handleComingSoon = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    e.preventDefault();
+    const target = e.currentTarget;
+    const originalText = target.innerText;
+    target.innerText = "COMING SOON ⏳";
+    target.style.pointerEvents = "none";
+    setTimeout(() => {
+      target.innerText = originalText;
+      target.style.pointerEvents = "auto";
+    }, 2000);
+  };
+
   if (!mounted) return null;
 
   return (
@@ -40,7 +52,7 @@ export default function Home() {
           <a href="#collection">COLLECTION</a>
           <a href="#roadmap">ROADMAP</a>
         </div>
-        <a href={openseaLink} target="_blank" rel="noopener noreferrer" className="btn-uni btn-uni-primary" style={{ padding: '12px 24px' }}>
+        <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-primary" style={{ padding: '12px 24px' }}>
           OPENSEA
         </a>
       </nav>
@@ -65,7 +77,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <a href={openseaLink} target="_blank" rel="noopener noreferrer" className="btn-uni btn-uni-primary">
+              <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-primary">
                 MINT NOW
               </a>
               <a href="#collection" className="btn-uni btn-uni-outline">
@@ -83,8 +95,8 @@ export default function Home() {
               <h2 className="display-font uni-title-large">COLLECTION</h2>
               
               <div className="btn-group">
-                <button className="btn-uni btn-uni-primary">CHECK WHITELIST</button>
-                <a href={openseaLink} target="_blank" rel="noopener noreferrer" className="btn-uni btn-uni-outline">OPENSEA</a>
+                <button onClick={handleComingSoon} className="btn-uni btn-uni-primary">CHECK WHITELIST</button>
+                <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-outline">OPENSEA</a>
               </div>
             </div>
           </div>
