@@ -24,6 +24,8 @@ export default function Home() {
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   const handleComingSoon = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.preventDefault();
     const target = e.currentTarget;
@@ -188,6 +190,41 @@ export default function Home() {
                 </div>
                 <div className="roadmap-floor" aria-hidden="true"></div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="section">
+          <div className="container">
+            <div className="uni-section-header">
+              <h3 className="display-font uni-title-small">GOT QUESTIONS?</h3>
+              <h2 className="display-font uni-title-large">FAQ</h2>
+            </div>
+
+            <div className="faq-container">
+              {[
+                { q: "WHAT IS THE TOTAL SUPPLY?", a: "There will only ever be 1,111 unique Base Cats in existence." },
+                { q: "WHICH BLOCKCHAIN IS THIS ON?", a: "The collection is deploying exclusively on the Base Network to ensure lightning-fast transactions and virtually zero gas fees." },
+                { q: "WHEN IS THE MINT?", a: "We are launching soon! Make sure to follow our Twitter and join the community to get whitelist and drop updates." },
+                { q: "HOW DO I MINT?", a: "Minting will take place directly through a secure OpenSea Drop. Just connect your wallet when the drop is live." }
+              ].map((item, idx) => (
+                <div key={idx} className={`faq-item ${openFaq === idx ? 'active' : ''}`} onClick={() => setOpenFaq(openFaq === idx ? null : idx)}>
+                  <div className="faq-question">
+                    <h3 className="display-font">{item.q}</h3>
+                    <div className="faq-icon">{openFaq === idx ? '−' : '+'}</div>
+                  </div>
+                  {openFaq === idx && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }} 
+                      animate={{ height: "auto", opacity: 1 }} 
+                      className="faq-answer"
+                    >
+                      <p>{item.a}</p>
+                    </motion.div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </section>
