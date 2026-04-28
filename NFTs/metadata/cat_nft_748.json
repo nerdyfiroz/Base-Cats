@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #748",
+  "image": "cat_nft_748.png",
+  "dna": "3091f9f0adb93190",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "violetbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "azurefaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "emeraldeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "pinkear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehatglow.png"
+    }
+  ]
+}

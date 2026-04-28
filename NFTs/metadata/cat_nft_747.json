@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #747",
+  "image": "cat_nft_747.png",
+  "dna": "2d599eb7f70cd59d",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundmist.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "azurebase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "bluetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "mintear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "azurehat.png"
+    }
+  ]
+}

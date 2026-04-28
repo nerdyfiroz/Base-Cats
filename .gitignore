@@ -1,0 +1,74 @@
+# Dependencies
+node_modules/
+.next/
+.DS_Store
+
+# Environment
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Ignore the bulk NFT folders
+Background/
+Base/
+Body/
+Ears/
+Eyes/
+Faces/
+Hats/
+Noses/
+Tails/
+
+# Ignore all image files by default so we don't accidentally push thousands of NFTs
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.png
+
+# --- ALLOW TOP 20 NFTs FOR THE WEBSITE ---
+# (Next.js requires them to be inside the "public/NFTs" folder to work)
+!public/NFTs/cat_nft_001.png
+!public/NFTs/cat_nft_002.png
+!public/NFTs/cat_nft_003.png
+!public/NFTs/cat_nft_004.png
+!public/NFTs/cat_nft_005.png
+!public/NFTs/cat_nft_006.png
+!public/NFTs/cat_nft_007.png
+!public/NFTs/cat_nft_008.png
+!public/NFTs/cat_nft_009.png
+!public/NFTs/cat_nft_010.png
+!public/NFTs/cat_nft_011.png
+!public/NFTs/cat_nft_012.png
+!public/NFTs/cat_nft_013.png
+!public/NFTs/cat_nft_014.png
+!public/NFTs/cat_nft_015.png
+!public/NFTs/cat_nft_016.png
+!public/NFTs/cat_nft_017.png
+!public/NFTs/cat_nft_018.png
+!public/NFTs/cat_nft_019.png
+!public/NFTs/cat_nft_020.png
+
+# (Just in case they are still in the root NFTs folder, allow them to be staged)
+!NFTs/cat_nft_001.png
+!NFTs/cat_nft_002.png
+!NFTs/cat_nft_003.png
+!NFTs/cat_nft_004.png
+!NFTs/cat_nft_005.png
+!NFTs/cat_nft_006.png
+!NFTs/cat_nft_007.png
+!NFTs/cat_nft_008.png
+!NFTs/cat_nft_009.png
+!NFTs/cat_nft_010.png
+!NFTs/cat_nft_011.png
+!NFTs/cat_nft_012.png
+!NFTs/cat_nft_013.png
+!NFTs/cat_nft_014.png
+!NFTs/cat_nft_015.png
+!NFTs/cat_nft_016.png
+!NFTs/cat_nft_017.png
+!NFTs/cat_nft_018.png
+!NFTs/cat_nft_019.png
+!NFTs/cat_nft_020.png

@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #640",
+  "image": "cat_nft_640.png",
+  "dna": "4c0d92a91a712c10",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundhalo.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "magentabase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "yellowbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "emeraldtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "yellowear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "magentahat.png"
+    }
+  ]
+}

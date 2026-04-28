@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #505",
+  "image": "cat_nft_505.png",
+  "dna": "eb341d5ec2205e48",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "silverbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "magentabase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "redtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "yellowface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "silvernose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "pinkear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "limehat.png"
+    }
+  ]
+}

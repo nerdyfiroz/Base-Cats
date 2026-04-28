@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #064",
+  "image": "cat_nft_064.png",
+  "dna": "213ad37e298dc936",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundmist.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "peachbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "aquatail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "peachnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "goldear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "limehat.png"
+    }
+  ]
+}

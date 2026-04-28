@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #045",
+  "image": "cat_nft_045.png",
+  "dna": "f558bceca04d7a86",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "silverbackgroundhalo.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "cyanbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "yellowbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "pinktail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "pinkface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "emeraldeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanearglow.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "charcoalhat.png"
+    }
+  ]
+}

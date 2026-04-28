@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #866",
+  "image": "cat_nft_866.png",
+  "dna": "e097cd0d8c1797e9",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "pinkbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "redbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "redtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "yelloweye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "greenhat.png"
+    }
+  ]
+}

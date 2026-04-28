@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #086",
+  "image": "cat_nft_086.png",
+  "dna": "e78d5720fafabbe9",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundhalo.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "magentabase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "pinktail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "amberface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "aquaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "limeear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "amberhat.png"
+    }
+  ]
+}

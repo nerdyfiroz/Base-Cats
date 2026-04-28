@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #900",
+  "image": "cat_nft_900.png",
+  "dna": "1afb5068cce84db8",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "azurebase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "bluetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "pinkface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "limeear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "limehat.png"
+    }
+  ]
+}

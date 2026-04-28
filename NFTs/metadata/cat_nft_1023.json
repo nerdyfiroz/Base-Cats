@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #1023",
+  "image": "cat_nft_1023.png",
+  "dna": "29c182824dbaa534",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "indigobackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "redbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "azurebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "pinktail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "aquaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "mintear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "bluehat.png"
+    }
+  ]
+}

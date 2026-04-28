@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #578",
+  "image": "cat_nft_578.png",
+  "dna": "ce0a77b61060f783",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "magentabase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "emeraldtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "azurefaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "charcoalear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "azurehat.png"
+    }
+  ]
+}

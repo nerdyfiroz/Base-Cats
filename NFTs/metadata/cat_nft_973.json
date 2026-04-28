@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #973",
+  "image": "cat_nft_973.png",
+  "dna": "99add926ed7816b8",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "aquabackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "pinktail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "silverface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "yelloweye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "greennoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "whiteear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "pinkhat.png"
+    }
+  ]
+}

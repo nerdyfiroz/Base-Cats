@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #644",
+  "image": "cat_nft_644.png",
+  "dna": "d28b15d50a8d86a8",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "greenbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "limebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "mintear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "azurehat.png"
+    }
+  ]
+}

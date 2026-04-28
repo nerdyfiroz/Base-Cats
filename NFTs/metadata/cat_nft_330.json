@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #330",
+  "image": "cat_nft_330.png",
+  "dna": "0256d985b7529793",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundmist.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "cyanbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "bluetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "yelloweye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "silverear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "azurehat.png"
+    }
+  ]
+}

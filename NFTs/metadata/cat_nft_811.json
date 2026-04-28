@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #811",
+  "image": "cat_nft_811.png",
+  "dna": "ea7586d251aba494",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "azurebackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "pinkbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "limebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "orangetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "charcoalface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "mintnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "silverear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehatglow.png"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #250",
+  "image": "cat_nft_250.png",
+  "dna": "c6e381d5ef1b220c",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "silverbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "pinkbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "pinkface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "violeteye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "redear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "amberhat.png"
+    }
+  ]
+}

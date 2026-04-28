@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #1012",
+  "image": "cat_nft_1012.png",
+  "dna": "e8e15345567ac14c",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "charcoalbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "orangetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "yelloweye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanearglow.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "grayhat.png"
+    }
+  ]
+}

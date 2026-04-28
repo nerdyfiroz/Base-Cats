@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #947",
+  "image": "cat_nft_947.png",
+  "dna": "f95e3cd8c9cbc590",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "bluebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "bluetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "aquaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "violetear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "magentahat.png"
+    }
+  ]
+}

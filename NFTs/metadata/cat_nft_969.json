@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #969",
+  "image": "cat_nft_969.png",
+  "dna": "2268e94bfcbd792d",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "silverbackgroundhalo.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "redbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "orangetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "yellowface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "mintnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhat.png"
+    }
+  ]
+}

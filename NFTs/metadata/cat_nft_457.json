@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #457",
+  "image": "cat_nft_457.png",
+  "dna": "2ec63ef1f0fb7396",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundflare.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "pinkface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "redeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "mintear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhatglow.png"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #765",
+  "image": "cat_nft_765.png",
+  "dna": "8af32ce130ab8a84",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "indigobackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "charcoalbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "cyanbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "azurefaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "charcoaleye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "peachnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "goldear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "limehat.png"
+    }
+  ]
+}

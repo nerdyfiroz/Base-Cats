@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #226",
+  "image": "cat_nft_226.png",
+  "dna": "7aba290086e0e6a1",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "violetbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "emeraldbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "azurebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "charcoaleyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "charcoalear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "grayhat.png"
+    }
+  ]
+}

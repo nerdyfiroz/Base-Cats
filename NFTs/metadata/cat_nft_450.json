@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #450",
+  "image": "cat_nft_450.png",
+  "dna": "91d49928e7877ed0",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundspark.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "peachbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "magentaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "peachnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "charcoalear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "grayhat.png"
+    }
+  ]
+}

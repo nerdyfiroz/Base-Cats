@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #042",
+  "image": "cat_nft_042.png",
+  "dna": "97e8ef1e2fe82395",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "aquatail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "mintnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "peachear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "indigohat.png"
+    }
+  ]
+}

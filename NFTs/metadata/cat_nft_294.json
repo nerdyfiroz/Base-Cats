@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #294",
+  "image": "cat_nft_294.png",
+  "dna": "9522f9317b0f7650",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "greenbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "bluebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "pinktail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "redeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "limeear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "bluehat.png"
+    }
+  ]
+}

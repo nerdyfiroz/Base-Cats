@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #328",
+  "image": "cat_nft_328.png",
+  "dna": "a982bdc65b44a748",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "aquabackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "yellowbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "silverface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "aquaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehat.png"
+    }
+  ]
+}

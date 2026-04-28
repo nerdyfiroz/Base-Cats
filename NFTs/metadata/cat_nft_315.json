@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #315",
+  "image": "cat_nft_315.png",
+  "dna": "6346854c6516a5d7",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "charcoaleye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "silvernose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanearglow.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "limehat.png"
+    }
+  ]
+}

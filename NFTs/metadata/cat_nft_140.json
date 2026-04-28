@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #140",
+  "image": "cat_nft_140.png",
+  "dna": "de146f7486fc138f",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundwave.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "charcoalbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "aquatail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "greennose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "redear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "indigohat.png"
+    }
+  ]
+}

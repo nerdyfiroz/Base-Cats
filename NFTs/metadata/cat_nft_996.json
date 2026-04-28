@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #996",
+  "image": "cat_nft_996.png",
+  "dna": "a597ac9b58d6f6c8",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundmist.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "aquatail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "azurefaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "greennose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanearglow.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhatglow.png"
+    }
+  ]
+}

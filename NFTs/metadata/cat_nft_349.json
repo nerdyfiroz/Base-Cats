@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #349",
+  "image": "cat_nft_349.png",
+  "dna": "85c2a477ec9c8526",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "violetbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "limebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "amberface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "silvereye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhatglow.png"
+    }
+  ]
+}

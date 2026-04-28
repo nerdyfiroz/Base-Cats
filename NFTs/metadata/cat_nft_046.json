@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #046",
+  "image": "cat_nft_046.png",
+  "dna": "8bccd060e2f3b60f",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundmist.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "cyanbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "bluebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "bluetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "charcoaleyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "mintnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "silverear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehatglow.png"
+    }
+  ]
+}

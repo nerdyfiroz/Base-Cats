@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #131",
+  "image": "cat_nft_131.png",
+  "dna": "cbdae7fc942bf7f4",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundspark.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "yellowbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "emeraldtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "pinkface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "violeteye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "silvernose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "violetear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehat.png"
+    }
+  ]
+}

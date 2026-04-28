@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #285",
+  "image": "cat_nft_285.png",
+  "dna": "87d833dc7a434777",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "aquabackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "ambertail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "yellowface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "yelloweye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "magentaearglow.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "azurehat.png"
+    }
+  ]
+}

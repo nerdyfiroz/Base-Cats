@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #921",
+  "image": "cat_nft_921.png",
+  "dna": "4f8e12190ee6f2c2",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "aquabackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "cyanbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "emeraldtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "charcoalear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "greenhat.png"
+    }
+  ]
+}

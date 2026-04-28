@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #1092",
+  "image": "cat_nft_1092.png",
+  "dna": "87f694c420b64e94",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "pinkbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "cyanbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "charcoaleye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "limehat.png"
+    }
+  ]
+}

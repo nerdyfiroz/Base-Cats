@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #432",
+  "image": "cat_nft_432.png",
+  "dna": "33a3c29907b0041d",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundspark.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "greenbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "yellowbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "pinktail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "magentaface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "emeraldeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "yellowear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "bluehat.png"
+    }
+  ]
+}

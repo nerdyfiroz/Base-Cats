@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #298",
+  "image": "cat_nft_298.png",
+  "dna": "8b70ed5c0efb3575",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "magentabase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "orangetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "azureface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "silvereye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "whiteear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehat.png"
+    }
+  ]
+}

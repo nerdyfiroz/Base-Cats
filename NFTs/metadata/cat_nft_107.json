@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #107",
+  "image": "cat_nft_107.png",
+  "dna": "cad41a67ef422ad7",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundflare.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "silverear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehat.png"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #1009",
+  "image": "cat_nft_1009.png",
+  "dna": "7c26f28de1f5e21e",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebasehalo.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "redtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "orangeface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "emeraldeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "silvernose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "pinkear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "amberhat.png"
+    }
+  ]
+}

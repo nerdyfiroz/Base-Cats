@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #607",
+  "image": "cat_nft_607.png",
+  "dna": "d49cd82674402ebe",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "silverbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "emeraldbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "silvereye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "magentaearglow.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhat.png"
+    }
+  ]
+}

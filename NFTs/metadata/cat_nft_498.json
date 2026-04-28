@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #498",
+  "image": "cat_nft_498.png",
+  "dna": "04a153a6e60c870e",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "pinkbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "orangeface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "redeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "mintnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "violetear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "pinkhat.png"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #924",
+  "image": "cat_nft_924.png",
+  "dna": "ceac503ce4ebee13",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "pinkbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "aquatail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "violetface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "charcoaleyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "crimsonhat.png"
+    }
+  ]
+}

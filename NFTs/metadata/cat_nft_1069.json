@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #1069",
+  "image": "cat_nft_1069.png",
+  "dna": "d366ebae4346fb46",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundmist.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "yellowbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "cyanbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "bluetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "azureface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "silvernose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "whiteear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhat.png"
+    }
+  ]
+}

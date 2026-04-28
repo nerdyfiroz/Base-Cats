@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #173",
+  "image": "cat_nft_173.png",
+  "dna": "ff6de3b26cdc59d4",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundhalo.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "magentaface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "silvereye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "peachear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehatglow.png"
+    }
+  ]
+}

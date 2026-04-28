@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #873",
+  "image": "cat_nft_873.png",
+  "dna": "84c05e805bb25ecd",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "aquabackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "cyanbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "orangetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "yellowface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "charcoaleyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "indigohat.png"
+    }
+  ]
+}

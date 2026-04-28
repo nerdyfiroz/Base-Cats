@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #936",
+  "image": "cat_nft_936.png",
+  "dna": "de65eb1d74d8efcb",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "pinkbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "greenbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "orangetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "blueface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "peachear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "crimsonhat.png"
+    }
+  ]
+}

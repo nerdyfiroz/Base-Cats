@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #567",
+  "image": "cat_nft_567.png",
+  "dna": "057793b859becb0d",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundmist.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "blueface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "redeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "greennoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "yellowear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "pinkhat.png"
+    }
+  ]
+}

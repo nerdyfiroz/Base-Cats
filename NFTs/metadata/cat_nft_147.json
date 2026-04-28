@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #147",
+  "image": "cat_nft_147.png",
+  "dna": "e5994d60ce8f7c50",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "silverbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "redbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "bluetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "redfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "violetear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "azurehat.png"
+    }
+  ]
+}

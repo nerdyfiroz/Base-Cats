@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #1067",
+  "image": "cat_nft_1067.png",
+  "dna": "59f5022553809e4e",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "violetbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "bluebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "redtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "charcoalface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "charcoaleye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "mintnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "silverear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "limehat.png"
+    }
+  ]
+}

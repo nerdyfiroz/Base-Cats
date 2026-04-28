@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #043",
+  "image": "cat_nft_043.png",
+  "dna": "421a02a1d235e046",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "azurebackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "azurebase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "bluebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "silverface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "peachear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhatglow.png"
+    }
+  ]
+}

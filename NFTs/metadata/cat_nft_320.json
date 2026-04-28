@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #320",
+  "image": "cat_nft_320.png",
+  "dna": "e66ee5d2cdbab949",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "indigobackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "emeraldbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "cyanbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "orangeface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "magentaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "magentaear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "pinkhat.png"
+    }
+  ]
+}

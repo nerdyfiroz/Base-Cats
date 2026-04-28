@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #595",
+  "image": "cat_nft_595.png",
+  "dna": "a7a81782deba57a5",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundhalo.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "cyanbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "magentaface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "aquaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "greennose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "yellowear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "limehat.png"
+    }
+  ]
+}

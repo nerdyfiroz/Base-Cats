@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #249",
+  "image": "cat_nft_249.png",
+  "dna": "b9fab2e3f560f1d6",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "violetbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "yellowbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "azureface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "limeear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "indigohat.png"
+    }
+  ]
+}

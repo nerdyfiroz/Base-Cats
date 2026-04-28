@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #1105",
+  "image": "cat_nft_1105.png",
+  "dna": "3fec0f8a783ba454",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "azurebackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "violetbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "amberbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "redtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "azureface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "violeteye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "limeear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "pinkhat.png"
+    }
+  ]
+}

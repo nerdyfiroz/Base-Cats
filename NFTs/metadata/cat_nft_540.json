@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #540",
+  "image": "cat_nft_540.png",
+  "dna": "d16bca84778be4fb",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackgroundspark.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "limebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "redtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "magentaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "greennoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "goldear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "magentahat.png"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #909",
+  "image": "cat_nft_909.png",
+  "dna": "eaf868b10154442b",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "charcoalbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "azurebase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "pinktail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "yelloweye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "graynoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "magentahat.png"
+    }
+  ]
+}

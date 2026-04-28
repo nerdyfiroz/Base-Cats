@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #383",
+  "image": "cat_nft_383.png",
+  "dna": "5622451704810189",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "mintbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebasehalo.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "silvereye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "redear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhat.png"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #965",
+  "image": "cat_nft_965.png",
+  "dna": "8d4cac1d584946cc",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundglow.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "violetbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "emeraldtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "charcoalface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "violeteye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "peachear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehatglow.png"
+    }
+  ]
+}

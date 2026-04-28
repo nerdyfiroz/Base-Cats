@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #408",
+  "image": "cat_nft_408.png",
+  "dna": "56dda3589efbd298",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "azurebackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebasehalo.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "magentabody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "violettailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenfaceglow.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "silverear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "greenhat.png"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #805",
+  "image": "cat_nft_805.png",
+  "dna": "9fe5d65168c79bb3",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundmist.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebasehalo.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "ambertail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "pinkface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "silvereye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "peachnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "silverear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "indigohat.png"
+    }
+  ]
+}

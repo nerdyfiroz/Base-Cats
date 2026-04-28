@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #895",
+  "image": "cat_nft_895.png",
+  "dna": "51638ca18513bb0b",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundwave.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "violetbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "bluetail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "magentaface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "indigoeyeglow.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "mintnose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "charcoalear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "charcoalhat.png"
+    }
+  ]
+}

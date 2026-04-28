@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #549",
+  "image": "cat_nft_549.png",
+  "dna": "995f7cf3c5a14f4e",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundwave.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "peachbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbodyglow.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "redtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "magentaface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "magentaeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "greennoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "magentaear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "charcoalhat.png"
+    }
+  ]
+}

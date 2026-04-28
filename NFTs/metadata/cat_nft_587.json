@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #587",
+  "image": "cat_nft_587.png",
+  "dna": "acae21a738819e14",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "peachbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "limebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "silverface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "redeye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "whiteear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "charcoalhat.png"
+    }
+  ]
+}

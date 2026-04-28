@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #816",
+  "image": "cat_nft_816.png",
+  "dna": "bbc5f3237db7f2b8",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "silverbackgroundhalo.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "limebody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "pinktail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "greenface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "orangenoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "magentaear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "redhat.png"
+    }
+  ]
+}

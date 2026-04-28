@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #451",
+  "image": "cat_nft_451.png",
+  "dna": "66739dfdfbade856",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "peachbackgroundspark.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "orangebaseglow.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "charcoaltailglow.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "pinkface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "yelloweye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknose.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "cyanearglow.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "magentahat.png"
+    }
+  ]
+}

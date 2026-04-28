@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #141",
+  "image": "cat_nft_141.png",
+  "dna": "dfcf867b7af13efb",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "violetbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "graybase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "greenbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "emeraldtail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "crimsonface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "crimsoneye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "greennoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "violetear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "orangehatglow.png"
+    }
+  ]
+}

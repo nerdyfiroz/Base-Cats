@@ -1,0 +1,43 @@
+{
+  "name": "Cat NFT #310",
+  "image": "cat_nft_310.png",
+  "dna": "b32a1cb9296d3995",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "silverbackground.png"
+    },
+    {
+      "trait_type": "Base",
+      "value": "greenbase.png"
+    },
+    {
+      "trait_type": "Body",
+      "value": "redbody.png"
+    },
+    {
+      "trait_type": "Tail",
+      "value": "ambertail.png"
+    },
+    {
+      "trait_type": "Face",
+      "value": "yellowface.png"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "yelloweye.png"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "pinknoseglow.png"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "whiteear.png"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "grayhat.png"
+    }
+  ]
+}
