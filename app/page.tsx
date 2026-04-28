@@ -7,6 +7,8 @@ import { Twitter, Github } from 'lucide-react';
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [gifIndex, setGifIndex] = useState(1);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   
   const openseaLink = "https://opensea.io/";
 
@@ -21,7 +23,15 @@ export default function Home() {
     };
     spin();
     
-    return () => cancelAnimationFrame(animationFrameId);
+    // Simulated GIF Loop (cycles through images 1 to 20 at 5 FPS)
+    const gifInterval = setInterval(() => {
+      setGifIndex(prev => (prev % 20) + 1);
+    }, 200);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      clearInterval(gifInterval);
+    };
   }, []);
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -61,20 +71,39 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section id="home" className="hero">
+        <section id="home" className="hero relative">
           <div className="container hero-content">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
+              className="relative z-10"
             >
-              <h1 className="hero-title text-white">
-                THE BASE <span className="text-yellow">CATS</span>
+              <h1 className="hero-title display-font">
+                BASE <br/>
+                <span style={{ color: '#89CFF0' }}>CATS</span> <br/>
+                COLLECTION
               </h1>
+
+              {/* The "GIF" Character Overlapping the Text */}
+              <motion.img 
+                src={`/NFTs/cat_nft_${gifIndex.toString().padStart(3, '0')}.png`}
+                alt="Base Cats Character"
+                className="absolute z-20 object-contain pointer-events-none drop-shadow-2xl"
+                style={{ 
+                  top: '50%', 
+                  left: '50%', 
+                  transform: 'translate(-50%, -50%)',
+                  width: 'min(100vw, 600px)',
+                  height: 'min(100vh, 600px)',
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))'
+                }}
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              />
             </motion.div>
 
             <motion.div 
-              className="btn-group"
+              className="btn-group relative z-30"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
