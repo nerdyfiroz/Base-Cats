@@ -1,0 +1,351 @@
+'use client';
+import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useAccount } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
+import { useGameStore } from '@/lib/gameStore';
+import { getPlayer, upsertPlayer, getResources, getCatsForWallet, getTopGangs, supabase } from '@/lib/supabase';
+import { calcCurrentStamina, DISTRICTS } from '@/lib/gameUtils';
+
+import ResourceBar     from '@/components/game/ResourceBar';
+import CatCard         from '@/components/game/CatCard';
+import HeistModal      from '@/components/game/HeistModal';
+import CraftingPanel   from '@/components/game/CraftingPanel';
+import GangHQ          from '@/components/game/GangHQ';
+import PvPArena        from '@/components/game/PvPArena';
+
+// Dynamic import for Phaser (client-side only)
+const GameMap = dynamic(() => import('@/components/game/GameMap'), { ssr: false });
+
+type Tab = 'map' | 'heist' | 'craft' | 'pvp' | 'gang';
+
+// Mock traits (replace with on-chain contract reads via wagmi)
+const MOCK_TRAITS = { combatPower: 72, stealth: 58, hacking: 85, rarity: 2, stamina: 100, level: 12 };
+
+export default function GameDashboard() {
+  const { address, isConnected } = useAccount();
+  const { player, cats, resources, activeCat, notification,
+          setPlayer, setCats, setResources, setActiveCat, notify } = useGameStore();
+
+  const [tab, setTab] = useState<Tab>('map');
+  const [heistOpen, setHeistOpen] = useState(false);
+  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+  const [topGangs, setTopGangs] = useState<Awaited<ReturnType<typeof getTopGangs>>>([]);
+  const [loading, setLoading] = useState(true);
+
+  // ── Bootstrap player data on wallet connect ──────────────
+  useEffect(() => {
+    if (!address) { setLoading(false); return; }
+    (async () => {
+      setLoading(true);
+      const p = await upsertPlayer(address);
+      setPlayer(p);
+      const [res, catList, gangs] = await Promise.all([
+        getResources(p.id),
+        getCatsForWallet(address),
+        getTopGangs(10),
+      ]);
+
+      // ── Auto-create resource row for new players ──────────
+      if (res) {
+        setResources(res);
+      } else {
+        const { data: newRes } = await supabase
+          .from('resources')
+          .upsert(
+            { player_id: p.id, scrap: 0, wire: 0, chip: 0, fuel: 0, glow: 0, cred: 0 },
+            { onConflict: 'player_id' }
+          )
+          .select()
+          .single();
+        if (newRes) setResources(newRes);
+      }
+
+      setCats(catList);
+      setTopGangs(gangs);
+      setLoading(false);
+    })();
+  }, [address]);
+
+  // ── Heist result handler ──────────────────────────────────
+  const handleHeistSuccess = async (district: string, tier: number, loot: number, resource: string) => {
+    if (!resources || !player) return;
+    const updated = { ...resources, [resource]: (resources as any)[resource] + loot };
+    setResources(updated as any);
+    await supabase.from('resources').update({ [resource]: (updated as any)[resource] }).eq('player_id', player.id);
+    notify(`+${loot} ${resource.toUpperCase()} collected!`, 'success');
+    setHeistOpen(false);
+  };
+
+  // ── Craft handler ─────────────────────────────────────────
+  const handleCraft = async (gearKey: string) => {
+    if (!resources || !player) return;
+    const res = await fetch('/api/craft', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ playerWallet: address, gearKey }),
+    });
+    const data = await res.json();
+    if (data.resources) setResources(data.resources);
+  };
+
+  // ── District map click → open heist overlay ─────────────
+  const handleDistrictClick = (districtId: string) => {
+    setSelectedDistrict(districtId);
+    setHeistOpen(true);
+    // Stay on map tab so the overlay animates over the map
+  };
+
+  // ── PvP battle end ────────────────────────────────────────
+  const handleBattleEnd = async (won: boolean, rankChange: number) => {
+    if (!player) return;
+    const newRank = Math.max(0, player.pvp_rank + rankChange);
+    setPlayer({ ...player, pvp_rank: newRank });
+    await supabase.from('players').update({ pvp_rank: newRank }).eq('id', player.id);
+  };
+
+  if (!isConnected) return <ConnectScreen />;
+  if (loading)      return <LoadingScreen />;
+
+  const myTraitsForCat = { ...MOCK_TRAITS, level: activeCat?.level ?? 1 };
+
+  return (
+    <div className="game-shell">
+      {/* ── Top bar ─────────────────────────────────────── */}
+      <header className="game-topbar">
+        <div className="game-brand">🐱 BASE CATZ</div>
+        {resources && <ResourceBar resources={resources} />}
+        <ConnectButton showBalance={false} chainStatus="icon" accountStatus="avatar" />
+      </header>
+
+      {/* ── Notification toast ──────────────────────────── */}
+      <AnimatePresence>
+        {notification && (
+          <motion.div
+            className={`toast toast--${notification.type}`}
+            initial={{ y: -60, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -60, opacity: 0 }}
+          >
+            {notification.msg}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="game-layout">
+        {/* ── Left sidebar: Cat roster ─────────────────── */}
+        <aside className="game-sidebar">
+          <div className="sidebar-title">MY CATS</div>
+          <div className="cat-roster">
+            {cats.length === 0 && (
+              <div className="no-cats">
+                <div style={{ fontSize: 48 }}>🐱</div>
+                <p>No cats detected in this wallet.</p>
+                <p>Mint a Base Cat to play!</p>
+              </div>
+            )}
+            {cats.map(cat => (
+              <CatCard
+                key={cat.id}
+                cat={cat}
+                traits={MOCK_TRAITS}
+                isActive={activeCat?.id === cat.id}
+                onClick={() => setActiveCat(cat)}
+              />
+            ))}
+          </div>
+
+          {/* Quick actions */}
+          {activeCat && (
+            <div className="quick-actions">
+              <div className="sidebar-title">QUICK ACTION</div>
+              <button className="btn-neon w-full" onClick={() => setHeistOpen(true)}>
+                🎯 SEND ON HEIST
+              </button>
+              <button className="btn-ghost w-full mt-2" onClick={() => setTab('pvp')}>
+                ⚔️ PVP BATTLE
+              </button>
+            </div>
+          )}
+        </aside>
+
+        {/* ── Main area ────────────────────────────────── */}
+        <main className="game-main">
+          {/* Tab navigation */}
+          <nav className="game-tabs">
+            {([
+              { id: 'map',   label: '🗺️ Map' },
+              { id: 'heist', label: '🎯 Heist' },
+              { id: 'craft', label: '🔧 Craft' },
+              { id: 'pvp',   label: '⚔️ PvP' },
+              { id: 'gang',  label: '🐾 Gang' },
+            ] as { id: Tab; label: string }[]).map(t => (
+              <button
+                key={t.id}
+                className={`game-tab ${tab === t.id ? 'active' : ''}`}
+                onClick={() => setTab(t.id)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </nav>
+
+          {/* Tab content */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={tab}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.22 }}
+              className="tab-content"
+            >
+              {tab === 'map' && (
+                <div>
+                  <GameMap
+                    onDistrictClick={handleDistrictClick}
+                    controlledDistricts={['neon_alley', 'shadow_docks']}
+                  />
+                  <div className="district-legend">
+                    {DISTRICTS.map(d => (
+                      <button
+                        key={d.id}
+                        className="legend-pill"
+                        style={{ borderColor: d.color, color: d.color }}
+                        onClick={() => handleDistrictClick(d.id)}
+                      >
+                        {d.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {tab === 'heist' && (
+                <div className="heist-tab-placeholder">
+                  {activeCat ? (
+                    <>
+                      <div style={{ fontSize: 48, textAlign: 'center' }}>🎯</div>
+                      <p style={{ textAlign: 'center', color: '#a389f4', marginTop: 12 }}>
+                        Select a district from the <strong>Map</strong> tab or use<br />
+                        <strong>SEND ON HEIST</strong> from the sidebar.
+                      </p>
+                      <button
+                        className="btn-neon"
+                        style={{ margin: '16px auto', display: 'block' }}
+                        onClick={() => setHeistOpen(true)}
+                      >
+                        🚀 OPEN HEIST
+                      </button>
+                    </>
+                  ) : (
+                    <p style={{ textAlign: 'center', color: '#888', marginTop: 32 }}>
+                      Select a cat from the sidebar to begin a heist.
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {tab === 'craft' && resources && (
+                <CraftingPanel resources={resources} onCraft={handleCraft} />
+              )}
+
+              {tab === 'pvp' && activeCat && (
+                <PvPArena
+                  myCat={activeCat}
+                  myTraits={myTraitsForCat}
+                  onBattleEnd={handleBattleEnd}
+                />
+              )}
+
+              {tab === 'gang' && (
+                <GangHQ
+                  gang={null}
+                  topGangs={topGangs}
+                  playerWallet={address ?? ''}
+                  onCreateGang={async (name) => {
+                    const res = await fetch('/api/gang/create', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ leaderWallet: address, name }),
+                    });
+                    const data = await res.json();
+                    if (data.gang) { notify(`Gang "${name}" created!`, 'success'); }
+                    else notify(data.error || 'Failed to create gang', 'error');
+                  }}
+                  onRaid={() => notify('Raid launched! 🗡️', 'success')}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </main>
+
+        {/* ── Right panel: Season stats ─────────────────── */}
+        <aside className="game-sidebar-right">
+          <SeasonPanel pvpRank={player?.pvp_rank ?? 1000} seasonPoints={player?.season_points ?? 0} />
+        </aside>
+      </div>
+
+      {/* Heist modal overlay (from tab or map click) */}
+      <AnimatePresence>
+        {heistOpen && activeCat && (
+          <HeistModal
+            cat={activeCat}
+            traits={MOCK_TRAITS}
+            onClose={() => setHeistOpen(false)}
+            onSuccess={handleHeistSuccess}
+          />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function ConnectScreen() {
+  return (
+    <div className="connect-screen">
+      <div className="connect-card">
+        <div style={{ fontSize: 80 }}>🐱</div>
+        <h1 className="connect-title">BASE CATZ<br/><span>NEON HEIST</span></h1>
+        <p className="connect-sub">Connect your wallet to enter the city.</p>
+        <ConnectButton label="🔗 CONNECT WALLET" />
+      </div>
+    </div>
+  );
+}
+
+function LoadingScreen() {
+  return (
+    <div className="connect-screen">
+      <div className="connect-card">
+        <motion.div style={{ fontSize: 80 }} animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}>⚡</motion.div>
+        <p className="connect-sub">Loading the city…</p>
+      </div>
+    </div>
+  );
+}
+
+function SeasonPanel({ pvpRank, seasonPoints }: { pvpRank: number; seasonPoints: number }) {
+  const timeLeft = '47d 12h';
+  return (
+    <div className="season-panel">
+      <div className="panel-title">🏆 SEASON 1</div>
+      <div className="season-timer">⏱ {timeLeft} left</div>
+      <div className="season-stat"><span>PvP Rank</span><strong>#{pvpRank}</strong></div>
+      <div className="season-stat"><span>Season Points</span><strong>{seasonPoints}</strong></div>
+      <div className="season-progress">
+        <div className="section-sub">Battle Pass</div>
+        <div className="bp-track">
+          <div className="bp-fill" style={{ width: `${Math.min(100, (seasonPoints / 500) * 100)}%` }} />
+        </div>
+        <div className="bp-lv">Lv {Math.floor(seasonPoints / 50) + 1}</div>
+      </div>
+      <div className="season-rewards">
+        <div className="section-sub">Next Reward</div>
+        <div className="reward-preview">🔩 500 SCRAP</div>
+      </div>
+    </div>
+  );
+}

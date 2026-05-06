@@ -9,11 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "2.1.7",
+    "@supabase/supabase-js": "^2.105.3",
+    "@tanstack/react-query": "^5.100.9",
+    "framer-motion": "^11.2.6",
+    "lucide-react": "^0.378.0",
     "next": "14.2.3",
+    "phaser": "^3.88.2",
     "react": "^18",
     "react-dom": "^18",
-    "framer-motion": "^11.2.6",
-    "lucide-react": "^0.378.0"
+    "viem": "^2.21.0",
+    "wagmi": "2.12.29",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@types/node": "^20",
