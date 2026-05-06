@@ -4,12 +4,13 @@ import { simulatePvP } from '@/lib/gameUtils';
 
 export const dynamic = 'force-dynamic';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
-);
-
 export async function POST(req: NextRequest) {
+  // ── Client created inside handler — env vars are available at request time ──
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
   try {
     const { attackerWallet, defenderWallet, attackerCatId, defenderCatId, attackerTraits, defenderTraits } = await req.json();
 
@@ -28,18 +29,18 @@ export async function POST(req: NextRequest) {
 
     // ── Simulate battle ────────────────────────────────
     const { rounds, winner } = simulatePvP(attackerTraits, defenderTraits);
-    const attackerWon   = winner === 'attacker';
-    const defenderWon   = !attackerWon;
-    const winnerWallet  = attackerWon ? attackerWallet : defenderWallet;
+    const attackerWon  = winner === 'attacker';
+    const defenderWon  = !attackerWon;
+    const winnerWallet = attackerWon ? attackerWallet : defenderWallet;
 
     // ── Rank changes ───────────────────────────────────
     const { data: aPlayer } = await supabase.from('players').select('pvp_rank').eq('wallet_address', attackerWallet).single();
     const { data: dPlayer } = await supabase.from('players').select('pvp_rank').eq('wallet_address', defenderWallet).single();
 
-    const attackerRank  = aPlayer?.pvp_rank ?? 1000;
-    const defenderRank  = dPlayer?.pvp_rank ?? 1000;
-    const rankDiff      = Math.abs(attackerRank - defenderRank);
-    const rankBonus     = rankDiff > 200 && defenderRank > attackerRank ? 15 : 0;
+    const attackerRank = aPlayer?.pvp_rank ?? 1000;
+    const defenderRank = dPlayer?.pvp_rank ?? 1000;
+    const rankDiff     = Math.abs(attackerRank - defenderRank);
+    const rankBonus    = rankDiff > 200 && defenderRank > attackerRank ? 15 : 0;
 
     const attackerDelta = attackerWon ? 20 + rankBonus : -15;
     const defenderDelta = attackerWon ? -10 : 20;
@@ -66,11 +67,11 @@ export async function POST(req: NextRequest) {
 
     // ── Log battle ─────────────────────────────────────
     await supabase.from('pvp_battles').insert({
-      attacker_wallet: attackerWallet,
-      defender_wallet: defenderWallet,
-      attacker_cat_id: attackerCatId,
-      defender_cat_id: defenderCatId,
-      winner_wallet:   winnerWallet,
+      attacker_wallet:      attackerWallet,
+      defender_wallet:      defenderWallet,
+      attacker_cat_id:      attackerCatId,
+      defender_cat_id:      defenderCatId,
+      winner_wallet:        winnerWallet,
       rounds,
       rank_change_attacker: attackerDelta,
     });

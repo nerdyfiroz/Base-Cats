@@ -4,12 +4,13 @@ import { runHeist, calcLoot, applyXP, HEIST_TIERS, DISTRICTS } from '@/lib/gameU
 
 export const dynamic = 'force-dynamic';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
-);
-
 export async function POST(req: NextRequest) {
+  // ── Client created inside handler — env vars are available at request time ──
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
   try {
     const { catTokenId, district, tier, catStats } = await req.json();
 
@@ -55,10 +56,10 @@ export async function POST(req: NextRequest) {
     await supabase
       .from('cats')
       .update({
-        stamina_current:   newStamina,
+        stamina_current:    newStamina,
         stamina_last_regen: new Date().toISOString(),
-        xp:                newXP,
-        level:             newLevel,
+        xp:                 newXP,
+        level:              newLevel,
       })
       .eq('token_id', catTokenId);
 
@@ -68,7 +69,7 @@ export async function POST(req: NextRequest) {
       const { data: res } = await supabase
         .from('resources')
         .select('*')
-        .eq('player_id', cat.owner_wallet) // ideally join player
+        .eq('player_id', cat.owner_wallet)
         .single();
 
       if (res) {
@@ -81,9 +82,9 @@ export async function POST(req: NextRequest) {
 
     // ── Log heist ─────────────────────────────────────
     await supabase.from('heist_log').insert({
-      cat_token_id:    catTokenId,
-      player_wallet:   cat.owner_wallet,
-      district_id:     district,
+      cat_token_id:     catTokenId,
+      player_wallet:    cat.owner_wallet,
+      district_id:      district,
       tier,
       outcome,
       resources_earned: { [districtData.drop]: loot },

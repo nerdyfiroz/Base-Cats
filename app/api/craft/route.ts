@@ -4,12 +4,13 @@ import { GEAR_RECIPES, canCraft } from '@/lib/gameUtils';
 
 export const dynamic = 'force-dynamic';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
-);
-
 export async function POST(req: NextRequest) {
+  // ── Client created inside handler — env vars are available at request time ──
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
   try {
     const { playerWallet, gearKey } = await req.json();
 

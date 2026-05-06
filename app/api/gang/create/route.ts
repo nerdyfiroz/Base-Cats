@@ -3,12 +3,13 @@ import { createClient } from '@supabase/supabase-js';
 
 export const dynamic = 'force-dynamic';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
-);
-
 export async function POST(req: NextRequest) {
+  // ── Client created inside handler — env vars are available at request time ──
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
   try {
     const { leaderWallet, name } = await req.json();
     if (!leaderWallet || !name?.trim()) {
@@ -27,17 +28,16 @@ export async function POST(req: NextRequest) {
 
     // Create gang
     const { data: gang } = await supabase.from('gangs').insert({
-      name: name.trim(),
+      name:          name.trim(),
       leader_wallet: leaderWallet.toLowerCase(),
-      bank_cred: 0,
-      pvp_wins: 0,
-      season_rank: 999,
+      bank_cred:     0,
+      pvp_wins:      0,
+      season_rank:   999,
     }).select().single();
 
     // Join player to gang
     await supabase.from('players').update({ gang_id: gang.id }).eq('id', player.id);
 
-    // Init territories (all uncontrolled at start)
     return NextResponse.json({ gang });
   } catch (err) {
     console.error('[gang/create]', err);
