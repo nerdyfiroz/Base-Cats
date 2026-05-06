@@ -49,7 +49,7 @@ export default function GameDashboard() {
     args:         address ? [address] : undefined,
     query:        { enabled: !!address },
   });
-  const hasNFT = nftBalance !== undefined && BigInt(nftBalance) > 0n;
+  const hasNFT = nftBalance !== undefined && BigInt(nftBalance) > BigInt(0);
 
   const [tab, setTab] = useState<Tab>('map');
   const [heistOpen, setHeistOpen] = useState(false);
