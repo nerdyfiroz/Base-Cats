@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAccount, useReadContract } from 'wagmi';
+import { base } from 'wagmi/chains';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { CONTRACTS } from '@/lib/wagmi';
 
@@ -47,6 +48,7 @@ export default function GameDashboard() {
     abi:          ERC721_ABI,
     functionName: 'balanceOf',
     args:         address ? [address] : undefined,
+    chainId:      base.id,
     query:        { enabled: !!address },
   });
   const hasNFT = nftBalance !== undefined && BigInt(nftBalance) > BigInt(0);
