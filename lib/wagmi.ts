@@ -13,9 +13,9 @@ export const wagmiConfig = getDefaultConfig({
   ssr: true,
 });
 
-// Contract addresses (deploy and fill these in)
+// Contract addresses
 export const CONTRACTS = {
-  BaseCatzNFT:      '0x0000000000000000000000000000000000000001',
+  BaseCatzNFT:      '0x790996aaE2A4AEF87612139CFe8e7eae97c8E5C1', // ✅ Deployed on Base
   GangRegistry:     '0x0000000000000000000000000000000000000002',
   ResourceToken:    '0x0000000000000000000000000000000000000003',
   MarketplaceEscrow:'0x0000000000000000000000000000000000000004',

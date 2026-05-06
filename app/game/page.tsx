@@ -2,8 +2,9 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAccount } from 'wagmi';
+import { useAccount, useReadContract } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { CONTRACTS } from '@/lib/wagmi';
 
 import { useGameStore } from '@/lib/gameStore';
 import { getPlayer, upsertPlayer, getResources, getCatsForWallet, getTopGangs, supabase } from '@/lib/supabase';
@@ -21,13 +22,34 @@ const GameMap = dynamic(() => import('@/components/game/GameMap'), { ssr: false 
 
 type Tab = 'map' | 'heist' | 'craft' | 'pvp' | 'gang';
 
-// Mock traits (replace with on-chain contract reads via wagmi)
+// Minimal ERC-721 ABI — only balanceOf needed for the gate check
+const ERC721_ABI = [
+  {
+    name: 'balanceOf',
+    type: 'function',
+    stateMutability: 'view',
+    inputs:  [{ name: 'owner', type: 'address' }],
+    outputs: [{ name: '',     type: 'uint256' }],
+  },
+] as const;
+
+// Mock traits (replace with on-chain tokenURI / trait reads)
 const MOCK_TRAITS = { combatPower: 72, stealth: 58, hacking: 85, rarity: 2, stamina: 100, level: 12 };
 
 export default function GameDashboard() {
   const { address, isConnected } = useAccount();
   const { player, cats, resources, activeCat, notification,
           setPlayer, setCats, setResources, setActiveCat, notify } = useGameStore();
+
+  // ── On-chain NFT gate: must hold ≥1 Base Cat to play ────────
+  const { data: nftBalance, isLoading: nftLoading } = useReadContract({
+    address:      CONTRACTS.BaseCatzNFT as `0x${string}`,
+    abi:          ERC721_ABI,
+    functionName: 'balanceOf',
+    args:         address ? [address] : undefined,
+    query:        { enabled: !!address },
+  });
+  const hasNFT = nftBalance !== undefined && BigInt(nftBalance) > 0n;
 
   const [tab, setTab] = useState<Tab>('map');
   const [heistOpen, setHeistOpen] = useState(false);
@@ -106,8 +128,11 @@ export default function GameDashboard() {
     await supabase.from('players').update({ pvp_rank: newRank }).eq('id', player.id);
   };
 
+  // ── Guards (order matters) ───────────────────────────────
   if (!isConnected) return <ConnectScreen />;
-  if (loading)      return <LoadingScreen />;
+  if (nftLoading)   return <LoadingScreen label="Checking NFT ownership…" />;
+  if (!hasNFT)      return <NoNFTScreen address={address!} />;
+  if (loading)      return <LoadingScreen label="Loading the city…" />;
 
   const myTraitsForCat = { ...MOCK_TRAITS, level: activeCat?.level ?? 1 };
 
@@ -316,12 +341,52 @@ function ConnectScreen() {
   );
 }
 
-function LoadingScreen() {
+function LoadingScreen({ label = 'Loading the city…' }: { label?: string }) {
   return (
     <div className="connect-screen">
       <div className="connect-card">
         <motion.div style={{ fontSize: 80 }} animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}>⚡</motion.div>
-        <p className="connect-sub">Loading the city…</p>
+        <p className="connect-sub">{label}</p>
+      </div>
+    </div>
+  );
+}
+
+function NoNFTScreen({ address }: { address: string }) {
+  const contractUrl = `https://basescan.org/token/0x790996aaE2A4AEF87612139CFe8e7eae97c8E5C1`;
+  const marketUrl   = `https://opensea.io/assets/base/0x790996aaE2A4AEF87612139CFe8e7eae97c8E5C1`;
+  return (
+    <div className="connect-screen">
+      <div className="connect-card" style={{ maxWidth: 440 }}>
+        <div style={{ fontSize: 72 }}>🚫🐱</div>
+        <h1 className="connect-title" style={{ fontSize: 28 }}>NO BASE CAT<br/><span>DETECTED</span></h1>
+        <p className="connect-sub">
+          Your wallet <code className="wallet-code">{address.slice(0,6)}…{address.slice(-4)}</code> doesn’t hold a Base Catz NFT.
+        </p>
+        <p className="connect-sub" style={{ fontSize: 13, marginTop: -8 }}>
+          You need at least <strong style={{ color: 'var(--neon-purple)' }}>1 Base Cat</strong> to enter Neon Heist.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
+          <a
+            href={marketUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-neon"
+            style={{ textDecoration: 'none', justifyContent: 'center' }}
+          >
+            🛒 GET A BASE CAT ON OPENSEA
+          </a>
+          <a
+            href={contractUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost"
+            style={{ textDecoration: 'none', justifyContent: 'center', fontSize: 11 }}
+          >
+            📄 View Contract on Basescan
+          </a>
+        </div>
+        <ConnectButton label="🔄 Switch Wallet" />
       </div>
     </div>
   );

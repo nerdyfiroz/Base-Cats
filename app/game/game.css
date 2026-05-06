@@ -288,6 +288,7 @@ body { background: var(--bg-dark); color: var(--text); font-family: 'Inter', san
 .connect-title  { font-family: 'Archivo Black', sans-serif; font-size: 40px; line-height: 1; color: var(--text); }
 .connect-title span { color: var(--neon-purple); }
 .connect-sub    { font-size: 15px; color: var(--text-muted); line-height: 1.5; }
+.wallet-code    { font-family: 'Inter', monospace; font-size: 13px; background: rgba(163,137,244,0.12); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; color: var(--neon-purple); }
 
 /* ── Game Map ────────────────────────────────────── */
 .game-map-container canvas { display: block; }
