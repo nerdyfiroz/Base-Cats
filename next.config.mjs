@@ -7,6 +7,7 @@ const nextConfig = {
       fs: false,
       net: false,
       tls: false,
+      encoding: false,
       'pino-pretty': false,
       lokijs: false,
     };

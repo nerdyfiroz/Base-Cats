@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
     // ── Simulate battle ────────────────────────────────
     const { rounds, winner } = simulatePvP(attackerTraits, defenderTraits);
     const attackerWon   = winner === 'attacker';
+    const defenderWon   = !attackerWon;
     const winnerWallet  = attackerWon ? attackerWallet : defenderWallet;
 
     // ── Rank changes ───────────────────────────────────
