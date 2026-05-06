@@ -62,32 +62,34 @@ export default function GameDashboard() {
     if (!address) { setLoading(false); return; }
     (async () => {
       setLoading(true);
-      const p = await upsertPlayer(address);
-      setPlayer(p);
-      const [res, catList, gangs] = await Promise.all([
-        getResources(p.id),
-        getCatsForWallet(address),
-        getTopGangs(10),
-      ]);
+      try {
+        // Sync player and resources via API (bypasses RLS limits)
+        const res = await fetch('/api/player/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ walletAddress: address })
+        });
+        
+        if (!res.ok) throw new Error('Failed to sync player data');
+        const data = await res.json();
+        
+        setPlayer(data.player);
+        setResources(data.resources);
 
-      // ── Auto-create resource row for new players ──────────
-      if (res) {
-        setResources(res);
-      } else {
-        const { data: newRes } = await supabase
-          .from('resources')
-          .upsert(
-            { player_id: p.id, scrap: 0, wire: 0, chip: 0, fuel: 0, glow: 0, cred: 0 },
-            { onConflict: 'player_id' }
-          )
-          .select()
-          .single();
-        if (newRes) setResources(newRes);
+        // Fetch remaining public read data
+        const [catList, gangs] = await Promise.all([
+          getCatsForWallet(address),
+          getTopGangs(10),
+        ]);
+
+        setCats(catList);
+        setTopGangs(gangs);
+      } catch (err) {
+        console.error('Failed to load game data:', err);
+        notify('Failed to load game data. Please refresh.', 'error');
+      } finally {
+        setLoading(false);
       }
-
-      setCats(catList);
-      setTopGangs(gangs);
-      setLoading(false);
     })();
   }, [address]);
 
