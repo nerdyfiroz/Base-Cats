@@ -1,38 +1,73 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Twitter, Github } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Twitter, Github, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const CARD_COUNT = 18;
+const ANGLE_STEP = 360 / CARD_COUNT;
+const RADIUS = 720;
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [isSpinning, setIsSpinning] = useState(true);
   const [gifIndex, setGifIndex] = useState(1);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartX = useRef(0);
+  const dragStartRotation = useRef(0);
+  const animRef = useRef<number | null>(null);
   
   const openseaLink = "https://opensea.io/";
 
+  // Derive active card from rotation
+  useEffect(() => {
+    const normalized = ((rotation % 360) + 360) % 360;
+    const idx = Math.round(normalized / ANGLE_STEP) % CARD_COUNT;
+    setActiveCard((CARD_COUNT - idx) % CARD_COUNT);
+  }, [rotation]);
+
+  // Auto-spin loop
   useEffect(() => {
     setMounted(true);
-    
-    // Auto-spin the 3D carousel smoothly
-    let animationFrameId: number;
+    if (!isSpinning || isDragging) return;
     const spin = () => {
-      setRotation(prev => prev - 0.15); // Adjust speed here
-      animationFrameId = requestAnimationFrame(spin);
+      setRotation(prev => prev - 0.18);
+      animRef.current = requestAnimationFrame(spin);
     };
-    spin();
-    
-    // Simulated GIF Loop (cycles through images 1 to 20 at 5 FPS)
+    animRef.current = requestAnimationFrame(spin);
+    return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
+  }, [isSpinning, isDragging]);
+
+  // GIF cycling
+  useEffect(() => {
     const gifInterval = setInterval(() => {
       setGifIndex(prev => (prev % 20) + 1);
     }, 200);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      clearInterval(gifInterval);
-    };
+    return () => clearInterval(gifInterval);
   }, []);
+
+  // Drag handlers for carousel
+  const onDragStart = useCallback((clientX: number) => {
+    setIsDragging(true);
+    dragStartX.current = clientX;
+    dragStartRotation.current = rotation;
+  }, [rotation]);
+
+  const onDragMove = useCallback((clientX: number) => {
+    if (!isDragging) return;
+    const delta = clientX - dragStartX.current;
+    setRotation(dragStartRotation.current + delta * 0.25);
+  }, [isDragging]);
+
+  const onDragEnd = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  const rotateNext = () => setRotation(r => r - ANGLE_STEP);
+  const rotatePrev = () => setRotation(r => r + ANGLE_STEP);
 
   const handleComingSoon = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.preventDefault();
@@ -117,51 +152,141 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Unishorns Style: 3D Coverflow Carousel */}
+        {/* Enhanced 3D Coverflow Carousel */}
         <section id="collection" className="carousel-section">
           <div className="container">
-            <div className="uni-section-header carousel-header">
+            <motion.div 
+              className="uni-section-header carousel-header"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, type: 'spring' }}
+            >
+              <div className="carousel-eyebrow">✦ EXPLORE THE ✦</div>
               <h2 className="display-font uni-title-small">BASE CATS</h2>
               <h2 className="display-font uni-title-large">COLLECTION</h2>
-              
+              <p className="carousel-subtitle">1,111 uniquely generated feline masterpieces living on Base Network</p>
               <div className="btn-group">
                 <button onClick={handleComingSoon} className="btn-uni btn-uni-primary">CHECK WHITELIST</button>
                 <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-outline">OPENSEA</a>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="carousel-360-wrap">
-            <div className="carousel-360-stage" role="img" aria-label="Base Cats collection 360 degree carousel">
+          {/* Active card info badge */}
+          <div className="carousel-active-badge">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCard}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2 }}
+                className="carousel-badge-inner"
+              >
+                <span className="badge-hash">#</span>
+                <span className="badge-num">{String(activeCard + 1).padStart(3, '0')}</span>
+                <span className="badge-label">BASE CAT</span>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* 3D Stage */}
+          <div 
+            className="carousel-360-wrap"
+            onMouseDown={e => { setIsSpinning(false); onDragStart(e.clientX); }}
+            onMouseMove={e => onDragMove(e.clientX)}
+            onMouseUp={() => { onDragEnd(); setIsSpinning(true); }}
+            onMouseLeave={() => { if (isDragging) { onDragEnd(); setIsSpinning(true); } }}
+            onTouchStart={e => { setIsSpinning(false); onDragStart(e.touches[0].clientX); }}
+            onTouchMove={e => onDragMove(e.touches[0].clientX)}
+            onTouchEnd={() => { onDragEnd(); setIsSpinning(true); }}
+            style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+          >
+            {/* Atmospheric floor glow */}
+            <div className="carousel-floor-glow" />
+            {/* Fog / fade edges */}
+            <div className="carousel-fog-left" />
+            <div className="carousel-fog-right" />
+
+            <div className="carousel-360-stage" aria-label="Base Cats collection carousel">
               <div 
                 className="carousel-360-rotator"
-                style={{ transform: `translateZ(-720px) rotateY(${rotation}deg)` }}
+                style={{ transform: `translateZ(-${RADIUS}px) rotateY(${rotation}deg)` }}
               >
-                {Array.from({ length: 18 }).map((_, index) => {
-                  const angle = index * 20; // 360 / 18 = 20 degrees per card
+                {Array.from({ length: CARD_COUNT }).map((_, index) => {
+                  const angle = index * ANGLE_STEP;
                   const formattedNumber = (index + 1).toString().padStart(3, '0');
-                  
+                  const isActive = activeCard === index;
+
                   return (
-                    <div 
+                    <div
                       key={index}
-                      className="coverflow-card carousel-360-card"
-                      style={{ transform: `rotateY(${angle}deg) translateZ(720px) translateY(0px)` }}
+                      className={`carousel-360-card ${isActive ? 'card-active' : ''}`}
+                      style={{ transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)` }}
+                      onClick={() => {
+                        setIsSpinning(false);
+                        setRotation(r => {
+                          const target = -index * ANGLE_STEP;
+                          return target;
+                        });
+                        setTimeout(() => setIsSpinning(true), 600);
+                      }}
                     >
                       <div className="card-3d-face card-3d-face--front">
+                        {isActive && <div className="card-glow-ring" />}
                         <div className="card-art-shell">
-                          <img 
-                            src={`/NFTs/cat_nft_${formattedNumber}.png`} 
+                          <img
+                            src={`/NFTs/cat_nft_${formattedNumber}.png`}
                             alt={`Base Cat ${formattedNumber}`}
-                            onError={(e) => { e.currentTarget.src = `https://via.placeholder.com/400x400/000000/A389F4?text=CAT+${formattedNumber}`; }}
+                            onError={(e) => { e.currentTarget.src = `https://placehold.co/400x400/1a1030/A389F4?text=CAT+${formattedNumber}`; }}
                           />
                         </div>
+                        <div className="card-shimmer" />
+                        <div className="card-label">
+                          <span className="card-label-num">#{formattedNumber}</span>
+                          <span className="card-label-name">Base Cat</span>
+                        </div>
                       </div>
-                      <div className="card-3d-face card-3d-face--back" aria-hidden="true"></div>
+                      <div className="card-3d-face card-3d-face--back" aria-hidden="true">
+                        <div className="card-back-logo">🐱</div>
+                        <div className="card-back-text">BASE CATS</div>
+                      </div>
                     </div>
                   );
                 })}
               </div>
             </div>
+          </div>
+
+          {/* Navigation arrows */}
+          <div className="carousel-nav">
+            <motion.button
+              className="carousel-nav-btn"
+              onClick={rotatePrev}
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Previous cat"
+            >
+              <ChevronLeft size={28} />
+            </motion.button>
+            <div className="carousel-nav-dots">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`nav-dot ${Math.floor(activeCard / 3) === i ? 'nav-dot-active' : ''}`}
+                />
+              ))}
+            </div>
+            <motion.button
+              className="carousel-nav-btn"
+              onClick={rotateNext}
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Next cat"
+            >
+              <ChevronRight size={28} />
+            </motion.button>
           </div>
         </section>
 

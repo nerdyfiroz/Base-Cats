@@ -279,30 +279,148 @@ h1, h2, h3, h4, h5, h6, .display-font {
   .hero-title { font-size: 140px; }
 }
 
-/* Unishorns Style: 3D Coverflow Carousel */
+/* ===================================================
+   ENHANCED 3D CAROUSEL - Immersive Stage
+   =================================================== */
+
 .carousel-section { 
-  padding: 100px 0; 
-  overflow: hidden; /* Prevent horizontal scroll from 3D cards */
+  padding: 120px 0 60px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-color) 0%, #e8e4f5 40%, #f0eeff 70%, var(--bg-color) 100%);
+  position: relative;
 }
 
+/* Sparkle eyebrow above title */
+.carousel-eyebrow {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--uni-lavender);
+  opacity: 0.7;
+}
+
+.carousel-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+/* Active card badge */
+.carousel-active-badge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  height: 52px;
+  align-items: center;
+}
+
+.carousel-badge-inner {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  background: #111;
+  color: #fff;
+  padding: 8px 24px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--uni-lavender);
+  box-shadow: 0 0 20px rgba(163, 137, 244, 0.4);
+}
+
+.badge-hash {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px;
+  color: var(--uni-lavender);
+}
+
+.badge-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 28px;
+  color: #fff;
+  line-height: 1;
+}
+
+.badge-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  align-self: center;
+}
+
+/* The 3D wrap – perspective container */
 .carousel-360-wrap {
-  perspective: 1200px;
+  perspective: 1400px;
   width: 100vw;
-  height: 450px;
-  margin-top: 40px;
+  height: 520px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   left: 50%;
-  transform: translateX(-50%); /* Full bleed wrapper */
+  transform: translateX(-50%);
+  user-select: none;
 }
 
+/* Atmospheric floor glow below cards */
+.carousel-floor-glow {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 120px;
+  background: radial-gradient(ellipse at center, rgba(163, 137, 244, 0.35) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 0;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.15); }
+}
+
+/* Fog fade on the left and right edges */
+.carousel-fog-left,
+.carousel-fog-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.carousel-fog-left {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-color) 0%, transparent 100%);
+}
+
+/* Override fog bg to match new section gradient */
+.carousel-section .carousel-fog-left {
+  background: linear-gradient(to right, #e8e4f5 0%, transparent 100%);
+}
+.carousel-section .carousel-fog-right {
+  background: linear-gradient(to left, #e8e4f5 0%, transparent 100%);
+}
+
+.carousel-fog-right {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-color) 0%, transparent 100%);
+}
+
+/* 3D Stage */
 .carousel-360-stage {
   position: relative;
   width: 280px;
-  height: 350px;
+  height: 380px;
   transform-style: preserve-3d;
+  z-index: 5;
 }
 
 .carousel-360-rotator {
@@ -310,19 +428,47 @@ h1, h2, h3, h4, h5, h6, .display-font {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  /* rotateY controlled by React */
 }
 
+/* Each card */
 .carousel-360-card {
   position: absolute;
   width: 260px;
-  height: 340px;
+  height: 360px;
   left: 10px;
   top: 5px;
   transform-style: preserve-3d;
-  /* Individual card rotateY and translateZ controlled by inline styles */
+  cursor: pointer;
+  transition: filter 0.4s ease;
 }
 
+/* Active (front) card: pop out */
+.carousel-360-card.card-active .card-3d-face--front {
+  border-color: var(--uni-lavender);
+  box-shadow:
+    0 0 0 2px var(--uni-lavender),
+    0 0 40px rgba(163, 137, 244, 0.7),
+    0 30px 60px rgba(0,0,0,0.3);
+  transform: scale(1.06) translateY(-8px);
+}
+
+/* Glow ring that animates on active card */
+.card-glow-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: calc(var(--radius-card-outer) + 6px);
+  background: conic-gradient(from 0deg, #A389F4, #FFD700, #F4A7C5, #A389F4);
+  z-index: -1;
+  animation: ringRotate 3s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Card faces */
 .card-3d-face {
   position: absolute;
   inset: 0;
@@ -330,23 +476,39 @@ h1, h2, h3, h4, h5, h6, .display-font {
   border-radius: var(--radius-card-outer);
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
   border: 4px solid #111;
-  transition: border-color 0.3s, transform 0.3s;
-}
-
-.carousel-360-card:hover .card-3d-face {
-  border-color: var(--uni-lavender);
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
 }
 
 .card-3d-face--back {
   transform: rotateY(180deg);
-  background: var(--uni-gradient);
+  background: linear-gradient(135deg, #1a1030, #2d1a60);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
+.card-back-logo {
+  font-size: 64px;
+  filter: drop-shadow(0 0 20px rgba(163, 137, 244, 0.8));
+}
+
+.card-back-text {
+  font-family: 'Archivo Black', sans-serif;
+  color: var(--uni-lavender);
+  letter-spacing: 0.2em;
+  font-size: 14px;
+}
+
+/* Art area fills most of card */
 .card-art-shell {
-  width: 100%;
-  height: 100%;
+  flex: 1;
+  overflow: hidden;
   background: #fff;
 }
 
@@ -354,7 +516,106 @@ h1, h2, h3, h4, h5, h6, .display-font {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
+
+/* Shimmer sweep on card */
+.card-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 4s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes shimmerSweep {
+  0% { background-position: -100% 0; }
+  60%, 100% { background-position: 200% 0; }
+}
+
+/* Card label bar at bottom */
+.card-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #111;
+  flex-shrink: 0;
+}
+
+.card-label-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  color: var(--uni-lavender);
+}
+
+.card-label-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Navigation row */
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+  padding-bottom: 20px;
+}
+
+.carousel-nav-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  border: 3px solid var(--uni-lavender);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(163, 137, 244, 0.3);
+}
+
+.carousel-nav-btn:hover {
+  background: var(--uni-lavender);
+  color: #000;
+  box-shadow: 0 0 30px rgba(163, 137, 244, 0.7);
+}
+
+.carousel-nav-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+
+.nav-dot-active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--uni-lavender);
+  box-shadow: 0 0 10px rgba(163, 137, 244, 0.6);
+}
+
 
 /* Unishorns Style: Wallet Scene Roadmap */
 .roadmap-section {
