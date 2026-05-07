@@ -692,7 +692,7 @@ h1, h2, h3, h4, h5, h6, .display-font {
   z-index: 5;
   display: flex;
   flex-direction: column;
-  padding: 0 30px;
+  padding: 0 30px 220px 30px;
   margin-top: -80px; /* Pulls the stack up so it looks like it's coming out of the wallet top */
 }
 
