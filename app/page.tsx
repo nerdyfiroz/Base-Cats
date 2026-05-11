@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Twitter, Github, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Twitter, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 const CARD_COUNT = 18;
 const ANGLE_STEP = 360 / CARD_COUNT;
@@ -91,11 +91,15 @@ export default function Home() {
       </div>
 
       <nav className="navbar">
-        <div className="nav-brand">BASE CATS</div>
+        <div className="nav-brand">BASE CATZ</div>
         <div className="nav-links">
           <a href="#home">HOME</a>
           <a href="#collection">COLLECTION</a>
           <a href="#roadmap">ROADMAP</a>
+          <a href="https://x.com/CatzBase" target="_blank" rel="noopener noreferrer" className="nav-twitter-link">
+            <Twitter size={16} />
+            <span>@CatzBase</span>
+          </a>
         </div>
         <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-primary" style={{ padding: '12px 24px' }}>
           OPENSEA
@@ -117,9 +121,14 @@ export default function Home() {
               >
                 <h1 className="hero-title display-font">
                   BASE <br/>
-                  <span style={{ color: '#89CFF0' }}>CATS</span> <br/>
-                  COLLECTION
+                  <span style={{ color: '#89CFF0' }}>CATZ</span>
                 </h1>
+
+                <p className="hero-tagline">
+                  🐾 1111 unique feline legends living on Base.<br/>
+                  <span className="hero-tagline-sub">Cute outside. Degens inside. 👑</span><br/>
+                  <span className="hero-tagline-mini">Built for collectors, gamers &amp; the Base community.</span>
+                </p>
 
                 <div className="btn-group relative z-30">
                   <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-primary">
@@ -127,6 +136,15 @@ export default function Home() {
                   </a>
                   <a href="#collection" className="btn-uni btn-uni-outline">
                     EXPLORE
+                  </a>
+                  <a
+                    href="https://x.com/CatzBase"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-uni btn-uni-twitter"
+                  >
+                    <Twitter size={16} />
+                    FOLLOW US
                   </a>
                 </div>
               </motion.div>
@@ -163,12 +181,13 @@ export default function Home() {
               transition={{ duration: 0.7, type: 'spring' }}
             >
               <div className="carousel-eyebrow">✦ EXPLORE THE ✦</div>
-              <h2 className="display-font uni-title-small">BASE CATS</h2>
+              <h2 className="display-font uni-title-small">BASE CATZ</h2>
               <h2 className="display-font uni-title-large">COLLECTION</h2>
-              <p className="carousel-subtitle">1,111 uniquely generated feline masterpieces living on Base Network</p>
+              <p className="carousel-subtitle">1111 uniquely generated feline legends living on Base Network — Cute outside. Degens inside. 👑</p>
               <div className="btn-group">
                 <button onClick={handleComingSoon} className="btn-uni btn-uni-primary">CHECK WHITELIST</button>
                 <a href="#" onClick={handleComingSoon} className="btn-uni btn-uni-outline">OPENSEA</a>
+                <a href="https://x.com/CatzBase" target="_blank" rel="noopener noreferrer" className="btn-uni btn-uni-twitter"><Twitter size={15} /> TWITTER</a>
               </div>
             </motion.div>
           </div>
@@ -357,10 +376,11 @@ export default function Home() {
 
             <div className="faq-container">
               {[
-                { q: "WHAT IS THE TOTAL SUPPLY?", a: "There will only ever be 1,111 unique Base Cats in existence." },
+                { q: "WHAT IS THE TOTAL SUPPLY?", a: "There will only ever be 1111 unique Base Catz in existence. Cute outside. Degens inside. 👑" },
                 { q: "WHICH BLOCKCHAIN IS THIS ON?", a: "The collection is deploying exclusively on the Base Network to ensure lightning-fast transactions and virtually zero gas fees." },
-                { q: "WHEN IS THE MINT?", a: "We are launching soon! Make sure to follow our Twitter and join the community to get whitelist and drop updates." },
-                { q: "HOW DO I MINT?", a: "Minting will take place directly through a secure OpenSea Drop. Just connect your wallet when the drop is live." }
+                { q: "WHEN IS THE MINT?", a: "We are launching soon! Follow us on Twitter @CatzBase (https://x.com/CatzBase) and join the community to get whitelist and drop updates." },
+                { q: "HOW DO I MINT?", a: "Minting will take place directly through a secure OpenSea Drop. Just connect your wallet when the drop is live." },
+                { q: "WHO IS THIS FOR?", a: "BASE CATZ is built for collectors, gamers & the entire Base community. If you love feline art and on-chain culture, you belong here." }
               ].map((item, idx) => (
                 <div key={idx} className={`faq-item ${openFaq === idx ? 'active' : ''}`} onClick={() => setOpenFaq(openFaq === idx ? null : idx)}>
                   <div className="faq-question">
@@ -385,18 +405,34 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="footer">
-        <div className="container footer-content">
-          <div className="nav-brand">BASE CATS</div>
-          <div className="text-secondary font-medium">
-            &copy; 2026 Base Cats NFT. All rights reserved.
+        <div className="container footer-inner">
+          <div className="footer-top">
+            <div className="footer-brand-col">
+              <div className="nav-brand footer-brand">BASE CATZ</div>
+              <p className="footer-tagline">🐾 1111 unique feline legends on Base.<br/>Cute outside. Degens inside. 👑</p>
+            </div>
+            <div className="footer-links-col">
+              <div className="footer-link-group">
+                <span className="footer-link-heading">EXPLORE</span>
+                <a href="#home" className="footer-link">Home</a>
+                <a href="#collection" className="footer-link">Collection</a>
+                <a href="#roadmap" className="footer-link">Roadmap</a>
+                <a href="#faq" className="footer-link">FAQ</a>
+              </div>
+              <div className="footer-link-group">
+                <span className="footer-link-heading">COMMUNITY</span>
+                <a href="https://x.com/CatzBase" target="_blank" rel="noopener noreferrer" className="footer-link footer-social-link"><Twitter size={13}/> @CatzBase</a>
+                <a href="#" onClick={handleComingSoon} className="footer-link">OpenSea</a>
+              </div>
+            </div>
           </div>
-          <div className="flex gap-4">
-            <a href="#" className="social-icon">
-              <Twitter size={20} />
-            </a>
-            <a href="#" className="social-icon">
-              <Github size={20} />
-            </a>
+          <div className="footer-bottom">
+            <div className="text-secondary font-medium">&copy; 2026 Base Catz NFT. All rights reserved.</div>
+            <div className="footer-socials">
+              <a href="https://x.com/CatzBase" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Twitter">
+                <Twitter size={18} />
+              </a>
+            </div>
           </div>
         </div>
       </footer>
