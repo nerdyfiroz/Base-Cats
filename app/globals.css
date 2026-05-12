@@ -391,13 +391,19 @@ h1, h2, h3, h4, h5, h6, .display-font {
   left: 50%;
   transform: translateX(-50%);
   user-select: none;
-  overflow: hidden;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .carousel-360-wrap {
-    height: 300px;
-    perspective: 800px;
+    height: 340px;
+    perspective: 900px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .carousel-360-wrap {
+    height: 380px;
+    perspective: 1100px;
   }
 }
 
@@ -432,6 +438,13 @@ h1, h2, h3, h4, h5, h6, .display-font {
   z-index: 10;
 }
 
+@media (max-width: 768px) {
+  .carousel-fog-left,
+  .carousel-fog-right {
+    width: 60px;
+  }
+}
+
 .carousel-fog-left {
   left: 0;
   background: linear-gradient(to right, var(--bg-color) 0%, transparent 100%);
@@ -453,16 +466,23 @@ h1, h2, h3, h4, h5, h6, .display-font {
 /* 3D Stage */
 .carousel-360-stage {
   position: relative;
-  width: 280px;
-  height: 380px;
+  width: 260px;
+  height: 340px;
   transform-style: preserve-3d;
   z-index: 5;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .carousel-360-stage {
-    width: 160px;
-    height: 220px;
+    width: 200px;
+    height: 280px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .carousel-360-stage {
+    width: 220px;
+    height: 300px;
   }
 }
 
@@ -476,8 +496,8 @@ h1, h2, h3, h4, h5, h6, .display-font {
 /* Each card */
 .carousel-360-card {
   position: absolute;
-  width: 260px;
-  height: 360px;
+  width: 240px;
+  height: 330px;
   left: 10px;
   top: 5px;
   transform-style: preserve-3d;
@@ -485,12 +505,21 @@ h1, h2, h3, h4, h5, h6, .display-font {
   transition: filter 0.4s ease;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .carousel-360-card {
-    width: 150px;
-    height: 210px;
-    left: 5px;
-    top: 5px;
+    width: 185px;
+    height: 260px;
+    left: 8px;
+    top: 8px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .carousel-360-card {
+    width: 205px;
+    height: 282px;
+    left: 8px;
+    top: 8px;
   }
 }
 
@@ -671,20 +700,23 @@ h1, h2, h3, h4, h5, h6, .display-font {
 
 /* Unishorns Style: Wallet Scene Roadmap */
 .roadmap-section {
-  padding: 60px 0 100px 0;
+  padding: 80px 0 0 0;
   position: relative;
+  min-height: 200vh; /* tall enough for scroll-driven animation */
 }
 
 @media (max-width: 768px) {
   .roadmap-section {
-    padding: 40px 0 80px 0;
+    padding: 40px 0 0 0;
+    min-height: 240vh;
   }
 }
 
 .roadmap-sticky-container {
   max-width: 800px;
   margin: 0 auto;
-  position: relative;
+  position: sticky;
+  top: 80px;
 }
 
 .roadmap-header-overlay {
@@ -750,14 +782,16 @@ h1, h2, h3, h4, h5, h6, .display-font {
   z-index: 5;
   display: flex;
   flex-direction: column;
-  padding: 0 16px 180px 16px;
-  margin-top: -80px; /* Pulls the stack up so it looks like it's coming out of the wallet top */
+  padding: 0 16px 500px 16px;
+  margin-top: -80px;
+  min-height: 600px;
 }
 
 @media (max-width: 768px) {
   .roadmap-notes-stack {
-    padding: 0 8px 140px 8px;
+    padding: 0 8px 400px 8px;
     margin-top: -60px;
+    min-height: 500px;
   }
 }
 

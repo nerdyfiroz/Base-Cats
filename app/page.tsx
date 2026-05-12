@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Twitter, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { Twitter, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const CARD_COUNT = 18;
 const ANGLE_STEP = 360 / CARD_COUNT;
@@ -19,8 +19,21 @@ export default function Home() {
   const dragStartX = useRef(0);
   const dragStartRotation = useRef(0);
   const animRef = useRef<number | null>(null);
+  const roadmapRef = useRef<HTMLDivElement>(null);
   
   const openseaLink = "https://opensea.io/";
+
+  // Scroll-driven roadmap
+  const { scrollYProgress: roadmapProgress } = useScroll({
+    target: roadmapRef,
+    offset: ['start end', 'end start'],
+  });
+  // Each note fans out at different scroll thresholds
+  const note0Y = useTransform(roadmapProgress, [0.05, 0.3],  [0,   0]);
+  const note1Y = useTransform(roadmapProgress, [0.1,  0.4],  [-120, 220]);
+  const note2Y = useTransform(roadmapProgress, [0.2,  0.55], [-240, 460]);
+  const note3Y = useTransform(roadmapProgress, [0.3,  0.7],  [-360, 700]);
+  const noteYTransforms = [note0Y, note1Y, note2Y, note3Y];
 
   // Derive active card from rotation
   useEffect(() => {
@@ -32,7 +45,7 @@ export default function Home() {
   // Responsive carousel radius
   useEffect(() => {
     const updateRadius = () => {
-      setRadius(window.innerWidth <= 768 ? 320 : 720);
+      setRadius(window.innerWidth <= 480 ? 420 : window.innerWidth <= 768 ? 550 : 720);
     };
     updateRadius();
     window.addEventListener('resize', updateRadius);
@@ -319,8 +332,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Unishorns Style: Wallet Scene Roadmap */}
-        <section id="roadmap" className="roadmap-section">
+        {/* Scroll-driven Wallet Scene Roadmap */}
+        <section id="roadmap" className="roadmap-section" ref={roadmapRef}>
           <div className="container">
             <div className="roadmap-sticky-container">
               <div className="uni-section-header roadmap-header-overlay">
@@ -332,7 +345,7 @@ export default function Home() {
                 <div className="roadmap-wallet">
                   <div className="roadmap-wallet-texture"></div>
                   <div className="roadmap-wallet-stitch"></div>
-                  <div className="roadmap-reveal-text">PULL TO REVEAL</div>
+                  <div className="roadmap-reveal-text">SCROLL TO REVEAL</div>
                   
                   <div className="roadmap-notes-stack">
                     {[
@@ -343,22 +356,18 @@ export default function Home() {
                     ].map((item, idx) => (
                       <motion.div 
                         key={idx}
-                        initial={{ y: 0, opacity: 0 }}
-                        whileInView={{ y: idx * 40, opacity: 1 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.8, type: "spring", bounce: 0.4, delay: idx * 0.2 }}
                         className="roadmap-sticky-note"
                         style={{ 
                           '--note-color': item.color,
                           rotateZ: `${item.rot}deg`,
                           zIndex: item.z,
                           position: idx === 0 ? 'relative' : 'absolute',
-                          top: idx === 0 ? 0 : `${idx * 60}px`,
+                          top: idx === 0 ? 0 : 0,
                           left: 0,
                           width: '100%',
-                          transform: `translateZ(${item.z}px)`
+                          y: noteYTransforms[idx],
                         } as React.CSSProperties}
-                        whileHover={{ y: idx * 40 - 20, rotateZ: 0, scale: 1.02, zIndex: 30 }}
+                        whileHover={{ rotateZ: 0, scale: 1.02, zIndex: 30 }}
                       >
                         <div className="roadmap-pin"></div>
                         <div className="roadmap-note-content">
@@ -375,6 +384,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
 
         {/* FAQ Section */}
         <section id="faq" className="section">
