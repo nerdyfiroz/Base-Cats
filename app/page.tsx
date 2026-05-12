@@ -366,7 +366,7 @@ export default function Home() {
                           width: '100%',
                           rotateZ: item.rot,
                           y: noteYTransforms[idx],
-                        }}
+                        } as any}
                         whileHover={{ rotateZ: 0, scale: 1.02, zIndex: 30 }}
                       >
                         <div className="roadmap-pin"></div>
