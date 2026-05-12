@@ -359,14 +359,14 @@ export default function Home() {
                         className="roadmap-sticky-note"
                         style={{ 
                           '--note-color': item.color,
-                          rotateZ: `${item.rot}deg`,
                           zIndex: item.z,
                           position: idx === 0 ? 'relative' : 'absolute',
-                          top: idx === 0 ? 0 : 0,
+                          top: 0,
                           left: 0,
                           width: '100%',
+                          rotateZ: item.rot,
                           y: noteYTransforms[idx],
-                        } as React.CSSProperties}
+                        }}
                         whileHover={{ rotateZ: 0, scale: 1.02, zIndex: 30 }}
                       >
                         <div className="roadmap-pin"></div>
