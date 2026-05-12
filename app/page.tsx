@@ -6,7 +6,6 @@ import { Twitter, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 const CARD_COUNT = 18;
 const ANGLE_STEP = 360 / CARD_COUNT;
-const RADIUS = 720;
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -16,6 +15,7 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeCard, setActiveCard] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [radius, setRadius] = useState(720);
   const dragStartX = useRef(0);
   const dragStartRotation = useRef(0);
   const animRef = useRef<number | null>(null);
@@ -28,6 +28,16 @@ export default function Home() {
     const idx = Math.round(normalized / ANGLE_STEP) % CARD_COUNT;
     setActiveCard((CARD_COUNT - idx) % CARD_COUNT);
   }, [rotation]);
+
+  // Responsive carousel radius
+  useEffect(() => {
+    const updateRadius = () => {
+      setRadius(window.innerWidth <= 768 ? 320 : 720);
+    };
+    updateRadius();
+    window.addEventListener('resize', updateRadius);
+    return () => window.removeEventListener('resize', updateRadius);
+  }, []);
 
   // Auto-spin loop
   useEffect(() => {
@@ -231,7 +241,7 @@ export default function Home() {
             <div className="carousel-360-stage" aria-label="Base Cats collection carousel">
               <div 
                 className="carousel-360-rotator"
-                style={{ transform: `translateZ(-${RADIUS}px) rotateY(${rotation}deg)` }}
+                style={{ transform: `translateZ(-${radius}px) rotateY(${rotation}deg)` }}
               >
                 {Array.from({ length: CARD_COUNT }).map((_, index) => {
                   const angle = index * ANGLE_STEP;
@@ -242,7 +252,7 @@ export default function Home() {
                     <div
                       key={index}
                       className={`carousel-360-card ${isActive ? 'card-active' : ''}`}
-                      style={{ transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)` }}
+                      style={{ transform: `rotateY(${angle}deg) translateZ(${radius}px)` }}
                       onClick={() => {
                         setIsSpinning(false);
                         setRotation(r => {
