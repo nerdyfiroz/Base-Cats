@@ -7,6 +7,13 @@ import { Twitter, ChevronLeft, ChevronRight } from 'lucide-react';
 const CARD_COUNT = 18;
 const ANGLE_STEP = 360 / CARD_COUNT;
 
+const ROADMAP_NOTES = [
+  { phase: "PHASE 01", title: "THE LITTER",          desc: "The official launch of 1,111 unique Base Cats. Focusing entirely on community building and a flawless minting experience.", color: "var(--uni-lavender)", rot: -2, z: 20 },
+  { phase: "PHASE 02", title: "CATNIP DROPS",        desc: "Airdrops of exclusive digital accessories and companions for early holders. Premium physical pop-art apparel.",            color: "#89CFF0",             rot:  2, z: 15 },
+  { phase: "PHASE 03", title: "THE SCRATCHING POST", desc: "Expansion into the metaverse. Your Base Cat will serve as your unique 3D avatar in play-to-earn mini-games.",           color: "var(--uni-pink)",     rot: -1, z: 10 },
+  { phase: "PHASE 04", title: "THE CAT TREE",        desc: "Real world events and continued expansion of the Base Cats brand globally. High-tier holder utility.",                    color: "var(--uni-yellow)",  rot:  3, z:  5 },
+];
+
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [rotation, setRotation] = useState(0);
@@ -16,8 +23,11 @@ export default function Home() {
   const [activeCard, setActiveCard] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [radius, setRadius] = useState(720);
+  const [lightboxCard, setLightboxCard] = useState<number | null>(null);
+  const [selectedNote, setSelectedNote] = useState<number | null>(null);
   const dragStartX = useRef(0);
   const dragStartRotation = useRef(0);
+  const dragDist = useRef(0);   // track drag distance to distinguish tap vs drag
   const animRef = useRef<number | null>(null);
   
   const openseaLink = "https://opensea.io/";
@@ -64,11 +74,13 @@ export default function Home() {
     setIsDragging(true);
     dragStartX.current = clientX;
     dragStartRotation.current = rotation;
+    dragDist.current = 0;
   }, [rotation]);
 
   const onDragMove = useCallback((clientX: number) => {
     if (!isDragging) return;
     const delta = clientX - dragStartX.current;
+    dragDist.current = Math.abs(delta);
     setRotation(dragStartRotation.current + delta * 0.25);
   }, [isDragging]);
 
@@ -99,6 +111,90 @@ export default function Home() {
         <div className="orb orb-1"></div>
         <div className="orb orb-2"></div>
       </div>
+
+      {/* ── LIGHTBOX (Carousel image popup) ── */}
+      <AnimatePresence>
+        {lightboxCard !== null && (
+          <motion.div
+            className="lightbox-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightboxCard(null)}
+          >
+            <motion.div
+              className="lightbox-content"
+              initial={{ scale: 0.85, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.85, y: 30 }}
+              transition={{ type: 'spring', bounce: 0.3, duration: 0.4 }}
+              onClick={e => e.stopPropagation()}
+            >
+              <button className="lightbox-close" onClick={() => setLightboxCard(null)} aria-label="Close">✕</button>
+              <img
+                src={`/NFTs/cat_nft_${String(lightboxCard + 1).padStart(3, '0')}.png`}
+                alt={`Base Cat #${String(lightboxCard + 1).padStart(3, '0')}`}
+                onError={e => { e.currentTarget.src = `https://placehold.co/400x400/1a1030/A389F4?text=CAT+${String(lightboxCard + 1).padStart(3, '0')}`; }}
+              />
+              <div className="lightbox-label">
+                <span className="lightbox-num">#{String(lightboxCard + 1).padStart(3, '0')}</span>
+                <span className="lightbox-name">BASE CAT</span>
+              </div>
+              <div className="lightbox-nav">
+                <button
+                  aria-label="Previous"
+                  onClick={() => setLightboxCard(c => c !== null ? (c - 1 + CARD_COUNT) % CARD_COUNT : 0)}
+                >‹</button>
+                <button
+                  aria-label="Next"
+                  onClick={() => setLightboxCard(c => c !== null ? (c + 1) % CARD_COUNT : 0)}
+                >›</button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── NOTE DETAIL MODAL (Roadmap card popup) ── */}
+      <AnimatePresence>
+        {selectedNote !== null && (
+          <motion.div
+            className="note-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedNote(null)}
+          >
+            <motion.div
+              className="note-modal-card"
+              initial={{ scale: 0.85, y: 40 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.85, y: 40 }}
+              transition={{ type: 'spring', bounce: 0.3, duration: 0.4 }}
+              style={{ '--note-color': ROADMAP_NOTES[selectedNote].color } as any}
+              onClick={e => e.stopPropagation()}
+            >
+              <button className="note-modal-close" onClick={() => setSelectedNote(null)} aria-label="Close">✕</button>
+              <div className="note-modal-pin"></div>
+              <div className="note-modal-phase">{ROADMAP_NOTES[selectedNote].phase}</div>
+              <h3 className="note-modal-title">{ROADMAP_NOTES[selectedNote].title}</h3>
+              <p className="note-modal-desc">{ROADMAP_NOTES[selectedNote].desc}</p>
+              {/* Phase selector dots */}
+              <div className="note-modal-dots">
+                {ROADMAP_NOTES.map((n, i) => (
+                  <button
+                    key={i}
+                    className={`note-modal-dot ${i === selectedNote ? 'note-modal-dot--active' : ''}`}
+                    style={{ background: i === selectedNote ? n.color : 'rgba(0,0,0,0.15)' } as any}
+                    onClick={() => setSelectedNote(i)}
+                    aria-label={`Phase ${i + 1}`}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <nav className="navbar">
         <div className="nav-brand">BASE CATZ</div>
@@ -254,12 +350,19 @@ export default function Home() {
                       className={`carousel-360-card ${isActive ? 'card-active' : ''}`}
                       style={{ transform: `rotateY(${angle}deg) translateZ(${radius}px)` }}
                       onClick={() => {
-                        setIsSpinning(false);
-                        setRotation(r => {
-                          const target = -index * ANGLE_STEP;
-                          return target;
-                        });
-                        setTimeout(() => setIsSpinning(true), 600);
+                        // If small drag = tap: open lightbox
+                        if (dragDist.current < 8) {
+                          if (isActive) {
+                            // second tap on active card → lightbox
+                            setLightboxCard(index);
+                          } else {
+                            // first tap → bring to front
+                            setIsSpinning(false);
+                            setRotation(-index * ANGLE_STEP);
+                            setTimeout(() => setIsSpinning(true), 600);
+                          }
+                        }
+                        dragDist.current = 0;
                       }}
                     >
                       <div className="card-3d-face card-3d-face--front">
@@ -272,6 +375,10 @@ export default function Home() {
                           />
                         </div>
                         <div className="card-shimmer" />
+                        {/* Tap-to-view hint on active card */}
+                        {isActive && (
+                          <div className="card-view-hint">👁 TAP TO VIEW</div>
+                        )}
                         <div className="card-label">
                           <span className="card-label-num">#{formattedNumber}</span>
                           <span className="card-label-name">Base Cat</span>
@@ -336,16 +443,10 @@ export default function Home() {
                 <div className="roadmap-reveal-text">SCROLL TO REVEAL</div>
 
                 <div className="roadmap-notes-stack">
-                  {[
-                    { phase: "PHASE 01", title: "THE LITTER",          desc: "The official launch of 1,111 unique Base Cats. Focusing entirely on community building and a flawless minting experience.", color: "var(--uni-lavender)", rot: -2, z: 20 },
-                    { phase: "PHASE 02", title: "CATNIP DROPS",        desc: "Airdrops of exclusive digital accessories and companions for early holders. Premium physical pop-art apparel.",            color: "#89CFF0",             rot:  2, z: 15 },
-                    { phase: "PHASE 03", title: "THE SCRATCHING POST", desc: "Expansion into the metaverse. Your Base Cat will serve as your unique 3D avatar in play-to-earn mini-games.",           color: "var(--uni-pink)",     rot: -1, z: 10 },
-                    { phase: "PHASE 04", title: "THE CAT TREE",        desc: "Real world events and continued expansion of the Base Cats brand globally. High-tier holder utility.",                    color: "var(--uni-yellow)",   rot:  3, z:  5 },
-                  ].map((item, idx) => (
+                  {ROADMAP_NOTES.map((item, idx) => (
                     <motion.div
                       key={idx}
                       className="roadmap-sticky-note"
-                      /* start stacked → fan out when in view → collapse when out */
                       initial={{ y: 0, opacity: idx === 0 ? 1 : 0 }}
                       whileInView={{ y: idx * 170, opacity: 1 }}
                       viewport={{ once: false, margin: '-80px' }}
@@ -354,18 +455,19 @@ export default function Home() {
                         '--note-color': item.color,
                         zIndex: item.z,
                         position: idx === 0 ? 'relative' : 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
+                        top: 0, left: 0, width: '100%',
                         rotateZ: item.rot,
+                        cursor: 'pointer',
                       } as any}
                       whileHover={{ rotateZ: 0, scale: 1.02, zIndex: 30 }}
+                      onClick={() => setSelectedNote(idx)}
                     >
                       <div className="roadmap-pin"></div>
                       <div className="roadmap-note-content">
                         <div className="roadmap-note-header">{item.phase}</div>
                         <h3 className="roadmap-note-title">{item.title}</h3>
                         <p className="roadmap-note-desc">{item.desc}</p>
+                        <div className="roadmap-note-tap-hint">👆 TAP FOR DETAILS</div>
                       </div>
                     </motion.div>
                   ))}
