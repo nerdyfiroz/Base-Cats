@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Twitter, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const CARD_COUNT = 18;
@@ -19,21 +19,8 @@ export default function Home() {
   const dragStartX = useRef(0);
   const dragStartRotation = useRef(0);
   const animRef = useRef<number | null>(null);
-  const roadmapRef = useRef<HTMLDivElement>(null);
   
   const openseaLink = "https://opensea.io/";
-
-  // Scroll-driven roadmap
-  const { scrollYProgress: roadmapProgress } = useScroll({
-    target: roadmapRef,
-    offset: ['start end', 'end start'],
-  });
-  // Each note fans out at different scroll thresholds
-  const note0Y = useTransform(roadmapProgress, [0.05, 0.3],  [0,   0]);
-  const note1Y = useTransform(roadmapProgress, [0.1,  0.4],  [-120, 220]);
-  const note2Y = useTransform(roadmapProgress, [0.2,  0.55], [-240, 460]);
-  const note3Y = useTransform(roadmapProgress, [0.3,  0.7],  [-360, 700]);
-  const noteYTransforms = [note0Y, note1Y, note2Y, note3Y];
 
   // Derive active card from rotation
   useEffect(() => {
@@ -332,58 +319,64 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Scroll-driven Wallet Scene Roadmap */}
-        <section id="roadmap" className="roadmap-section" ref={roadmapRef}>
+        {/* Roadmap */}
+        <section id="roadmap" className="roadmap-section">
           <div className="container">
-            <div className="roadmap-sticky-container">
-              <div className="uni-section-header roadmap-header-overlay">
-                <h3 className="display-font uni-title-small">THE ROADMAP</h3>
-                <h2 className="display-font uni-title-large">THE VISION</h2>
-              </div>
 
-              <div className="roadmap-wallet-scene">
-                <div className="roadmap-wallet">
-                  <div className="roadmap-wallet-texture"></div>
-                  <div className="roadmap-wallet-stitch"></div>
-                  <div className="roadmap-reveal-text">SCROLL TO REVEAL</div>
-                  
-                  <div className="roadmap-notes-stack">
-                    {[
-                      { phase: "PHASE 01", title: "THE LITTER", desc: "The official launch of 1,111 unique Base Cats. Focusing entirely on community building and a flawless minting experience.", color: "var(--uni-lavender)", rot: -2, z: 20 },
-                      { phase: "PHASE 02", title: "CATNIP DROPS", desc: "Airdrops of exclusive digital accessories and companions for early holders. Premium physical pop-art apparel.", color: "#89CFF0", rot: 2, z: 15 },
-                      { phase: "PHASE 03", title: "THE SCRATCHING POST", desc: "Expansion into the metaverse. Your Base Cat will serve as your unique 3D avatar in play-to-earn mini-games.", color: "var(--uni-pink)", rot: -1, z: 10 },
-                      { phase: "PHASE 04", title: "THE CAT TREE", desc: "Real world events and continued expansion of the Base Cats brand globally. High-tier holder utility.", color: "var(--uni-yellow)", rot: 3, z: 5 },
-                    ].map((item, idx) => (
-                      <motion.div 
-                        key={idx}
-                        className="roadmap-sticky-note"
-                        style={{ 
-                          '--note-color': item.color,
-                          zIndex: item.z,
-                          position: idx === 0 ? 'relative' : 'absolute',
-                          top: 0,
-                          left: 0,
-                          width: '100%',
-                          rotateZ: item.rot,
-                          y: noteYTransforms[idx],
-                        } as any}
-                        whileHover={{ rotateZ: 0, scale: 1.02, zIndex: 30 }}
-                      >
-                        <div className="roadmap-pin"></div>
-                        <div className="roadmap-note-content">
-                          <div className="roadmap-note-header">{item.phase}</div>
-                          <h3 className="roadmap-note-title">{item.title}</h3>
-                          <p className="roadmap-note-desc">{item.desc}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-                <div className="roadmap-floor" aria-hidden="true"></div>
-              </div>
+            {/* Header — sits above the wallet, full document flow */}
+            <div className="uni-section-header" style={{ marginBottom: '60px' }}>
+              <h3 className="display-font uni-title-small">THE ROADMAP</h3>
+              <h2 className="display-font uni-title-large">THE VISION</h2>
             </div>
+
+            <div className="roadmap-wallet-scene">
+              <div className="roadmap-wallet">
+                <div className="roadmap-wallet-texture"></div>
+                <div className="roadmap-wallet-stitch"></div>
+                <div className="roadmap-reveal-text">SCROLL TO REVEAL</div>
+
+                <div className="roadmap-notes-stack">
+                  {[
+                    { phase: "PHASE 01", title: "THE LITTER",          desc: "The official launch of 1,111 unique Base Cats. Focusing entirely on community building and a flawless minting experience.", color: "var(--uni-lavender)", rot: -2, z: 20 },
+                    { phase: "PHASE 02", title: "CATNIP DROPS",        desc: "Airdrops of exclusive digital accessories and companions for early holders. Premium physical pop-art apparel.",            color: "#89CFF0",             rot:  2, z: 15 },
+                    { phase: "PHASE 03", title: "THE SCRATCHING POST", desc: "Expansion into the metaverse. Your Base Cat will serve as your unique 3D avatar in play-to-earn mini-games.",           color: "var(--uni-pink)",     rot: -1, z: 10 },
+                    { phase: "PHASE 04", title: "THE CAT TREE",        desc: "Real world events and continued expansion of the Base Cats brand globally. High-tier holder utility.",                    color: "var(--uni-yellow)",   rot:  3, z:  5 },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="roadmap-sticky-note"
+                      /* start stacked → fan out when in view → collapse when out */
+                      initial={{ y: 0, opacity: idx === 0 ? 1 : 0 }}
+                      whileInView={{ y: idx * 170, opacity: 1 }}
+                      viewport={{ once: false, margin: '-80px' }}
+                      transition={{ duration: 0.55, delay: idx * 0.1, type: 'spring', bounce: 0.25 }}
+                      style={{
+                        '--note-color': item.color,
+                        zIndex: item.z,
+                        position: idx === 0 ? 'relative' : 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        rotateZ: item.rot,
+                      } as any}
+                      whileHover={{ rotateZ: 0, scale: 1.02, zIndex: 30 }}
+                    >
+                      <div className="roadmap-pin"></div>
+                      <div className="roadmap-note-content">
+                        <div className="roadmap-note-header">{item.phase}</div>
+                        <h3 className="roadmap-note-title">{item.title}</h3>
+                        <p className="roadmap-note-desc">{item.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+              <div className="roadmap-floor" aria-hidden="true"></div>
+            </div>
+
           </div>
         </section>
+
 
 
         {/* FAQ Section */}

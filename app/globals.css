@@ -698,25 +698,22 @@ h1, h2, h3, h4, h5, h6, .display-font {
 }
 
 
-/* Unishorns Style: Wallet Scene Roadmap */
+/* Roadmap Section */
 .roadmap-section {
-  padding: 80px 0 0 0;
+  padding: 80px 0 60px 0;
   position: relative;
-  min-height: 200vh; /* tall enough for scroll-driven animation */
 }
 
 @media (max-width: 768px) {
   .roadmap-section {
-    padding: 40px 0 0 0;
-    min-height: 240vh;
+    padding: 50px 0 40px 0;
   }
 }
 
 .roadmap-sticky-container {
   max-width: 800px;
   margin: 0 auto;
-  position: sticky;
-  top: 80px;
+  position: relative;
 }
 
 .roadmap-header-overlay {
@@ -782,16 +779,16 @@ h1, h2, h3, h4, h5, h6, .display-font {
   z-index: 5;
   display: flex;
   flex-direction: column;
-  padding: 0 16px 500px 16px;
+  padding: 0 16px 780px 16px;
   margin-top: -80px;
-  min-height: 600px;
+  min-height: 800px;
 }
 
 @media (max-width: 768px) {
   .roadmap-notes-stack {
-    padding: 0 8px 400px 8px;
+    padding: 0 8px 720px 8px;
     margin-top: -60px;
-    min-height: 500px;
+    min-height: 740px;
   }
 }
 
